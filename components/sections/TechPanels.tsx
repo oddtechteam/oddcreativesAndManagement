@@ -30,7 +30,7 @@ export default function TechPanels() {
             <Reveal key={p.title} delay={i * 0.1} className="h-full">
               <Spotlight dark className="card-dark group flex h-full flex-col rounded-[2rem] p-8 backdrop-blur md:p-10">
                 {p.badge && (
-                  <span className="absolute right-6 top-6 rounded-full bg-aqua px-3 py-1 text-xs font-bold text-ink">{p.badge}</span>
+                  <span className="absolute right-6 top-6 rounded-full bg-aqua px-3 py-1 text-xs font-bold text-night">{p.badge}</span>
                 )}
                 <IconBadge tone="dark" size="lg">
                   <Icon name={p.icon} className="h-6 w-6" />

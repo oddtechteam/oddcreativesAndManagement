@@ -26,7 +26,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="grain relative overflow-hidden bg-ink text-white">
+    <footer className="grain relative overflow-hidden bg-night text-white">
       {/* Giant kinetic sign-off */}
       <Link href="/contact" className="group block border-b border-white/10 py-10 md:py-14" aria-label="Start a project with us">
         <Marquee seconds={30}>
@@ -133,7 +133,7 @@ export default function Footer() {
                   type="submit"
                   disabled={status === "sending"}
                   aria-label="Subscribe"
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-aqua text-ink transition-transform hover:scale-105 disabled:opacity-60"
+                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-aqua text-night transition-transform hover:scale-105 disabled:opacity-60"
                 >
                   <Icon name="arrowRight" className="h-4 w-4" strokeWidth={2.4} />
                 </button>

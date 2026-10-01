@@ -23,7 +23,7 @@ export default function ScrollTop() {
           exit={{ opacity: 0, y: 12 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 hidden h-12 w-12 lg:flex items-center justify-center rounded-full border border-line bg-white text-ink shadow-lift transition-colors hover:bg-brand hover:text-white"
+          className="fixed bottom-6 right-6 z-40 hidden h-12 w-12 lg:flex items-center justify-center rounded-full border border-line bg-surface text-ink shadow-lift transition-colors hover:bg-brand hover:text-white"
         >
           <Icon name="arrowUp" className="h-5 w-5" strokeWidth={2.2} />
         </motion.button>

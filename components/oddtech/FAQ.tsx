@@ -12,7 +12,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <Section className="bg-white" id="faq">
+    <Section className="bg-surface" id="faq">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow>FAQ</Eyebrow>
@@ -44,7 +44,7 @@ export default function FAQ() {
                     <span className="font-display text-lg font-bold text-ink">{f.q}</span>
                     <span
                       className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                        isOpen ? "rotate-45 bg-brand text-white" : "bg-white text-ink"
+                        isOpen ? "rotate-45 bg-brand text-white" : "bg-surface text-ink"
                       }`}
                     >
                       <Icon name="plus" className="h-4 w-4" strokeWidth={2.4} />

@@ -27,7 +27,7 @@ function Chips({
             onClick={() => onToggle(o)}
             aria-pressed={on}
             className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-              on ? "border-brand bg-brand text-white shadow-glow" : "border-line bg-white text-ink hover:border-brand/40"
+              on ? "border-brand bg-brand text-white shadow-glow" : "border-line bg-surface text-ink hover:border-brand/40"
             }`}
           >
             {multi && on && <Icon name="check" className="h-3.5 w-3.5" strokeWidth={2.6} />}

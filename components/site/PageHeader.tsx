@@ -14,7 +14,7 @@ export default function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="grain relative overflow-hidden bg-ink pb-20 pt-40 text-white md:pb-28 md:pt-48">
+    <section className="grain relative overflow-hidden bg-night pb-20 pt-40 text-white md:pb-28 md:pt-48">
       <Aurora />
       <Container className="relative">
         <div className="max-w-4xl">

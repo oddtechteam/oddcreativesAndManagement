@@ -8,7 +8,7 @@ import { oddtech, oddtechNav, services } from "@/lib/oddtech";
 
 export default function OddTechFooter() {
   return (
-    <footer className="grain relative overflow-hidden bg-ink text-white">
+    <footer className="grain relative overflow-hidden bg-night text-white">
       <Link href="/oddtech/contact" className="group block border-b border-white/10 py-10 md:py-14" aria-label="Start a project with OddTech">
         <Marquee seconds={30}>
           {["Let's build it", "Get a free quote", "Let's build it", "Ship something odd"].map((t, i) => (

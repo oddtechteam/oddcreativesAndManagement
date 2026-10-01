@@ -77,7 +77,7 @@ export default function ContactForm() {
               onClick={() => setBudget(b)}
               aria-pressed={budget === b}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                budget === b ? "border-brand bg-brand text-white" : "border-line bg-white text-ink hover:border-brand/40"
+                budget === b ? "border-brand bg-brand text-white" : "border-line bg-surface text-ink hover:border-brand/40"
               }`}
             >
               {b}

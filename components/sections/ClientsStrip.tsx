@@ -4,7 +4,7 @@ import { clients } from "@/lib/site";
 
 export default function ClientsStrip() {
   return (
-    <section className="border-y border-line bg-white py-12">
+    <section className="border-y border-line bg-surface py-12">
       <Container>
         <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-muted">
           Trusted by brands &amp; creators across India

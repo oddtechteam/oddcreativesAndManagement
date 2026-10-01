@@ -79,7 +79,7 @@ export default function ContactPage() {
                 href={site.mapDirections}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink shadow-lift hover:text-brand"
+                className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-surface px-4 py-2 text-sm font-semibold text-ink shadow-lift hover:text-brand"
               >
                 <Icon name="pin" className="h-4 w-4" />
                 Get directions

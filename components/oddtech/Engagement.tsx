@@ -6,7 +6,7 @@ import { engagement } from "@/lib/oddtech";
 
 export default function Engagement() {
   return (
-    <Section className="bg-white">
+    <Section className="bg-surface">
       <SectionHeading
         align="center"
         eyebrow="Ways to work with us"
@@ -22,11 +22,11 @@ export default function Engagement() {
           <Reveal key={m.t} delay={i * 0.08}>
             <div
               className={`group relative flex h-full flex-col rounded-[2rem] p-8 transition-transform duration-500 hover:-translate-y-1 md:p-10 ${
-                m.featured ? "ring-aurora grain overflow-hidden bg-ink text-white shadow-lift" : "border border-line bg-paper"
+                m.featured ? "ring-aurora grain overflow-hidden bg-night text-white shadow-lift" : "border border-line bg-paper"
               }`}
             >
               {m.featured && (
-                <span className="absolute right-6 top-6 rounded-full bg-aqua px-3 py-1 text-xs font-bold text-ink">Most flexible</span>
+                <span className="absolute right-6 top-6 rounded-full bg-aqua px-3 py-1 text-xs font-bold text-night">Most flexible</span>
               )}
               <IconBadge tone={m.featured ? "dark" : "brand"} size="lg">
                 <Icon name={m.icon} className="h-6 w-6" />

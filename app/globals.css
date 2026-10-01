@@ -7,7 +7,7 @@
    Switch with <html data-theme="…">; the default is Aurora. */
 :root,
 [data-theme="aurora"] {
-  --ink: 11 11 22;
+  --night: 11 11 22;
   --ink-2: 19 19 42;
   --ink-3: 28 28 58;
   --paper: 246 246 251;
@@ -28,7 +28,7 @@
 
 /* Ocean — deep navy, electric blue, sky */
 [data-theme="ocean"] {
-  --ink: 5 12 28;
+  --night: 5 12 28;
   --ink-2: 10 22 46;
   --ink-3: 17 34 66;
   --paper: 244 248 252;
@@ -49,7 +49,7 @@
 
 /* Emerald — forest night, emerald, teal */
 [data-theme="emerald"] {
-  --ink: 4 18 15;
+  --night: 4 18 15;
   --ink-2: 8 30 25;
   --ink-3: 14 44 37;
   --paper: 245 250 247;
@@ -70,7 +70,7 @@
 
 /* Midnight Lilac — slate, soft violet, mint */
 [data-theme="lilac"] {
-  --ink: 15 14 26;
+  --night: 15 14 26;
   --ink-2: 26 24 42;
   --ink-3: 38 35 60;
   --paper: 248 247 252;
@@ -89,12 +89,32 @@
   --muted: 104 100 128;
 }
 
+/* Light mode (default): text is the theme's night colour, cards are white. */
+:root {
+  --ink: var(--night);
+  --surface: 255 255 255;
+}
+
+/* Dark mode: light sections turn dark; dark sections stay as they are. */
+:root[data-mode="dark"] {
+  --ink: 236 236 246;
+  --paper: var(--ink-2);
+  --surface: var(--ink-3);
+  --line: 52 52 78;
+  --muted: 160 160 186;
+  --brand-50: 44 40 82;
+  --brand-100: 56 50 102;
+  --brand-200: 72 64 128;
+  --aqua-50: 22 50 64;
+  color-scheme: dark;
+}
+
 :root {
   --aurora: linear-gradient(100deg, rgb(var(--brand-soft)) 0%, rgb(var(--brand)) 30%, rgb(var(--plum)) 60%, rgb(var(--aqua)) 100%);
 }
 
 html {
-  background: rgb(var(--ink));
+  background: rgb(var(--night));
   scroll-padding-top: 5.5rem;
 }
 
@@ -177,7 +197,7 @@ html.lenis body {
   }
 
   .card {
-    @apply rounded-2xl border border-line bg-white shadow-soft;
+    @apply rounded-2xl border border-line bg-surface shadow-soft;
   }
 
   .card-dark {
@@ -185,7 +205,7 @@ html.lenis body {
   }
 
   .input {
-    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-brand focus:ring-4 focus:ring-brand/10;
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-muted/70 focus:border-brand focus:ring-4 focus:ring-brand/10;
   }
 
   /* Spotlight: a soft glow that tracks the pointer (set --mx/--my from JS). */

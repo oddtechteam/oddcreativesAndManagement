@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// The "odd" logo redrawn as a living character: the smiley faces' eyes follow
-// the pointer, they blink, and the hands on the "d" ascenders wave.
+// The Odd Creatives logo ("odd" with two smiling d's and raised hands), redrawn
+// in theme colours: letters in `currentColor`, hands in the accent colour (the
+// red of the original logo). The eyes follow the pointer, blink, and the hands wave.
 const VB = { w: 360, h: 236 };
 const faces = [
   { cx: 162, cy: 166, stem: 206, top: 70, delay: "0s" },
   { cx: 264, cy: 166, stem: 308, top: 50, delay: "0.35s" },
 ];
 
-function Hand({ x, y, delay }: { x: number; y: number; delay: string }) {
+function Hand({ x, y, delay, accent }: { x: number; y: number; delay: string; accent: string }) {
   return (
-    <g transform={`translate(${x} ${y})`}>
+    <g transform={`translate(${x} ${y})`} className={accent} fill="currentColor">
       <g className="wave-hand" style={{ animationDelay: delay }}>
         <rect x="-11" y="-24" width="22" height="26" rx="8" />
         <rect x="-11" y="-46" width="5.5" height="26" rx="2.75" />
@@ -25,15 +26,23 @@ function Hand({ x, y, delay }: { x: number; y: number; delay: string }) {
   );
 }
 
-// `compact` = small inline use (navbar logo): no glow, no aria label duplication.
-export default function OddMascot({ className = "", compact = false }: { className?: string; compact?: boolean }) {
+// `compact` = small inline use (logo): no glow, no aria label duplication.
+// `accent` = text-colour class for the hands.
+export default function OddMascot({
+  className = "",
+  compact = false,
+  accent = "text-aqua",
+}: {
+  className?: string;
+  compact?: boolean;
+  accent?: string;
+}) {
   const ref = useRef<SVGSVGElement>(null);
   const [look, setLook] = useState<[number, number][]>([
     [0, 0],
     [0, 0],
   ]);
   const [happy, setHappy] = useState(false);
-  const gid = `odd-o-${useId().replace(/:/g, "")}`;
 
   useEffect(() => {
     let raf = 0;
@@ -75,23 +84,16 @@ export default function OddMascot({ className = "", compact = false }: { classNa
       onPointerLeave={() => setHappy(false)}
       style={compact ? undefined : { filter: "drop-shadow(0 20px 40px rgb(var(--brand) / 0.45))" }}
     >
-      <defs>
-        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" style={{ stopColor: "rgb(var(--brand-soft))" }} />
-          <stop offset="55%" style={{ stopColor: "rgb(var(--brand))" }} />
-          <stop offset="100%" style={{ stopColor: "rgb(var(--aqua))" }} />
-        </linearGradient>
-      </defs>
 
       {/* o */}
-      <circle cx="62" cy="166" r="44" fill="none" stroke={`url(#${gid})`} strokeWidth="17" />
+      <circle cx="62" cy="166" r="44" fill="none" stroke="currentColor" strokeWidth="17" />
 
       {faces.map((f, i) => (
         <g key={i} fill="currentColor" stroke="currentColor">
           {/* d: bowl + ascender */}
           <circle cx={f.cx} cy={f.cy} r="44" fill="none" strokeWidth="17" />
           <line x1={f.stem} y1={f.cy + 2} x2={f.stem} y2={f.top} strokeWidth="17" strokeLinecap="round" />
-          <Hand x={f.stem} y={f.top + 4} delay={f.delay} />
+          <Hand x={f.stem} y={f.top + 4} delay={f.delay} accent={accent} />
 
           {/* face */}
           <g stroke="none" style={{ transform: `translate(${look[i][0]}px, ${look[i][1]}px)`, transition: "transform 0.15s ease-out" }}>

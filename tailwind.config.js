@@ -9,8 +9,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // ink = main text (flips in dark mode); night = always-dark surfaces.
         ink: { DEFAULT: v("ink"), 2: v("ink-2"), 3: v("ink-3") },
+        night: v("night"),
         paper: v("paper"),
+        surface: v("surface"),
         brand: { DEFAULT: v("brand"), deep: v("brand-deep"), soft: v("brand-soft"), 50: v("brand-50"), 100: v("brand-100"), 200: v("brand-200") },
         aqua: { DEFAULT: v("aqua"), deep: v("aqua-deep"), deeper: v("aqua-deeper"), 50: v("aqua-50") },
         plum: v("plum"),

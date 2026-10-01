@@ -31,7 +31,7 @@ export default function OddTechWork() {
         </div>
       </PageHeader>
 
-      <div className="border-b border-line bg-white py-5">
+      <div className="border-b border-line bg-surface py-5">
         <Marquee seconds={40}>
           {[...work, ...work].map((w, i) => (
             <a

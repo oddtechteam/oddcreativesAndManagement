@@ -10,7 +10,7 @@ export default function Highlights() {
         <Reveal>
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line shadow-lift md:grid-cols-4">
             {highlights.map((h) => (
-              <div key={h.label} className="bg-white px-6 py-8 text-center">
+              <div key={h.label} className="bg-surface px-6 py-8 text-center">
                 <dt className="sr-only">{h.label}</dt>
                 <dd className="font-display text-aurora text-4xl font-extrabold md:text-5xl">{h.value}</dd>
                 <dd className="mt-2 text-sm font-medium text-muted">{h.label}</dd>

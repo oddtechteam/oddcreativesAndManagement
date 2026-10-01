@@ -45,7 +45,7 @@ export default function AboutPage() {
             <h2 className="font-display mt-3 text-2xl font-extrabold leading-tight text-ink md:text-3xl">{about.mission.title}</h2>
             <p className="mt-5 leading-relaxed text-muted">{about.mission.body}</p>
           </Reveal>
-          <Reveal delay={0.08} className="relative h-full overflow-hidden rounded-2xl bg-ink p-8 text-white shadow-lift md:p-12">
+          <Reveal delay={0.08} className="relative h-full overflow-hidden rounded-2xl bg-night p-8 text-white shadow-lift md:p-12">
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/40 blur-3xl" />
             <div className="relative">
               <IconBadge size="lg" tone="dark">
@@ -62,7 +62,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <Section className="bg-white">
+      <Section className="bg-surface">
         <SectionHeading
           align="center"
           eyebrow="What we stand for"

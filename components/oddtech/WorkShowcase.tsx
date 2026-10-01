@@ -30,7 +30,7 @@ function VisitLink({ w, className = "" }: { w: WorkItem; className?: string }) {
 export default function WorkShowcase() {
   const featured = work.filter((w) => w.featured);
   return (
-    <Section className="bg-white">
+    <Section className="bg-surface">
       <SectionHeading
         eyebrow="Our work"
         title={
@@ -85,7 +85,7 @@ export function WorkStack() {
                   href={w.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group grid overflow-hidden rounded-[2rem] border border-line bg-white p-4 shadow-lift transition-shadow md:grid-cols-[1.15fr_0.85fr] md:gap-4 md:p-5"
+                  className="group grid overflow-hidden rounded-[2rem] border border-line bg-surface p-4 shadow-lift transition-shadow md:grid-cols-[1.15fr_0.85fr] md:gap-4 md:p-5"
                 >
                   <SitePreview src={w.image} url={w.url} title={w.client} className="aspect-[16/10.5]" />
                   <div className="flex flex-col p-4 md:p-8">

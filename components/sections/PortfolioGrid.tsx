@@ -13,9 +13,9 @@ const filters = [{ key: "all", title: "All work" }, ...categories.map((c) => ({ 
 // Cover gradients in brand tones, cycled per project.
 const covers = [
   "from-brand to-brand-soft",
-  "from-ink to-brand-deep",
+  "from-night to-brand-deep",
   "from-aqua-deep to-aqua",
-  "from-brand-deep to-ink",
+  "from-brand-deep to-night",
 ];
 
 export default function PortfolioGrid() {
@@ -33,7 +33,7 @@ export default function PortfolioGrid() {
               aria-selected={active === f.key}
               onClick={() => setActive(f.key)}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                active === f.key ? "border-brand bg-brand text-white" : "border-line bg-white text-ink hover:border-brand/40"
+                active === f.key ? "border-brand bg-brand text-white" : "border-line bg-surface text-ink hover:border-brand/40"
               }`}
             >
               {f.title}

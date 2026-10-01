@@ -19,7 +19,7 @@ export default function KineticBand() {
         </Marquee>
       </div>
       <div className="mt-16 rotate-[1.5deg] scale-105 md:mt-20">
-        <Marquee seconds={65} reverse pauseOnHover={false} className="bg-ink py-4 md:py-5">
+        <Marquee seconds={65} reverse pauseOnHover={false} className="bg-night py-4 md:py-5">
           {items.map((t) => (
             <span key={t} className="font-display flex items-center whitespace-nowrap px-6 text-2xl font-bold text-white/85 md:text-4xl">
               {t}

@@ -13,7 +13,7 @@ function Step({ i, n, t, d, progress }: { i: number; n: number; t: string; d: st
   const scale = useTransform(on, [0, 1], [0.85, 1]);
   return (
     <li className="relative flex gap-5 md:flex-col md:gap-0">
-      <span className="font-display relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-muted">
+      <span className="font-display relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-line bg-surface text-sm font-bold text-muted">
         {String(i + 1).padStart(2, "0")}
         <motion.span
           style={{ opacity: on, scale }}
@@ -54,7 +54,7 @@ export default function Process({
   const fill = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
-    <Section className="bg-white" id={id}>
+    <Section className="bg-surface" id={id}>
       <SectionHeading eyebrow={eyebrow} title={title} lead={lead} />
       <div ref={ref} className="relative">
         {/* Track + animated fill: vertical on mobile, horizontal on desktop */}

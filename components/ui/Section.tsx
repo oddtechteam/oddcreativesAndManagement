@@ -20,7 +20,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`relative py-24 md:py-32 ${dark ? "grain overflow-hidden bg-ink text-white" : ""} ${className}`}
+      className={`relative py-24 md:py-32 ${dark ? "grain overflow-hidden bg-night text-white" : ""} ${className}`}
     >
       {backdrop}
       <Container className="relative">{children}</Container>

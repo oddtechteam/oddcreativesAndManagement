@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import Icon, { type IconName } from "@/components/ui/Icon";
 import OddMascot from "@/components/sections/OddMascot";
 import ThemeSwitcher from "./ThemeSwitcher";
+import ModeToggle from "./ModeToggle";
 import { categories, nav, site } from "@/lib/site";
 import { oddtech, oddtechNav, services } from "@/lib/oddtech";
 
@@ -89,8 +90,8 @@ function ThemeMenu() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        aria-label="Change colour theme"
-        title="Change colour theme"
+        aria-label="Appearance: light/dark and colour theme"
+        title="Appearance"
         className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/80 transition-colors hover:border-white/25 hover:text-white"
       >
         <Icon name="palette" className="h-[1.1rem] w-[1.1rem]" />
@@ -104,7 +105,9 @@ function ThemeMenu() {
             transition={{ duration: 0.2 }}
             className="absolute right-0 top-full mt-3 origin-top-right rounded-2xl border border-white/10 bg-ink-2/95 p-4 shadow-lift backdrop-blur-xl"
           >
-            <p className="mb-3 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Colour theme</p>
+            <p className="mb-3 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Appearance</p>
+            <ModeToggle withLabel />
+            <p className="mb-3 mt-4 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Colour theme</p>
             <ThemeSwitcher />
           </motion.div>
         )}
@@ -182,7 +185,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
       <div
         className={`ring-aurora relative mx-auto flex max-w-site items-center justify-between gap-3 rounded-full pl-3 pr-2 transition-all duration-500 before:opacity-50 md:pl-4 ${
           scrolled || open || mega
-            ? "h-14 bg-ink/80 shadow-lift backdrop-blur-xl before:opacity-90"
+            ? "h-14 bg-night/80 shadow-lift backdrop-blur-xl before:opacity-90"
             : "h-16 bg-ink/30 backdrop-blur-md"
         }`}
       >
@@ -332,7 +335,8 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
             </Link>
           )}
           {/* Theme options for every visitor: inline swatches when there's room, a palette menu otherwise */}
-          <div className="hidden xl:block">
+          <div className="hidden items-center gap-2 xl:flex">
+            <ModeToggle />
             <ThemeSwitcher size="sm" />
           </div>
           <div className="hidden lg:block xl:hidden">
@@ -346,7 +350,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
 
           {/* Mobile: animated hamburger */}
           <button
-            className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white text-ink shadow-glow lg:hidden"
+            className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white text-night shadow-glow lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
@@ -383,7 +387,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                 animate={{ clipPath: "circle(150% at calc(100% - 2.6rem) 2.6rem)" }}
                 exit={{ clipPath: "circle(0% at calc(100% - 2.6rem) 2.6rem)" }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="grain fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-ink lg:hidden"
+                className="grain fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-night lg:hidden"
               >
                 <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-brand/40 blur-3xl" />
                 <div className="pointer-events-none absolute -left-24 bottom-24 h-72 w-72 rounded-full bg-aqua/20 blur-3xl" />
@@ -434,9 +438,15 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                       </a>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Colour theme</span>
-                      <ThemeSwitcher />
+                    <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Mode</span>
+                        <ModeToggle withLabel />
+                      </div>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Colour</span>
+                        <ThemeSwitcher />
+                      </div>
                     </div>
 
                     <Button href={b.cta.href} className="w-full" magnetic={false}>

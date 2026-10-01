@@ -26,7 +26,7 @@ export default function Advantages() {
             <Reveal key={a.t} delay={(i % 3) * 0.08} className={spans[i]}>
               <Spotlight
                 className={`card group h-full overflow-hidden p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift md:p-9 ${
-                  wide ? "bg-gradient-to-br from-white to-brand-50/60" : ""
+                  wide ? "bg-gradient-to-br from-surface to-brand-50/60" : ""
                 }`}
               >
                 <div className={wide ? "flex h-full flex-col justify-between gap-10 md:flex-row md:items-end" : ""}>

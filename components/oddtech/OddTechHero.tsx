@@ -42,7 +42,7 @@ export default function OddTechHero() {
   const current = reel[site];
 
   return (
-    <section onPointerMove={onPointerMove} className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-28 text-white lg:pt-32">
+    <section onPointerMove={onPointerMove} className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-night pt-28 text-white lg:pt-32">
       <Aurora intense />
       <div
         className="pointer-events-none absolute inset-0 hidden md:block"
@@ -116,7 +116,7 @@ export default function OddTechHero() {
                 <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-                <span className="ml-2 flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-white px-3 py-1 font-mono text-[0.68rem] text-muted">
+                <span className="ml-2 flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-white px-3 py-1 font-mono text-[0.68rem] text-night/60">
                   <Icon name="shield" className="h-3 w-3 flex-shrink-0 text-aqua-deep" />
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span key={current.domain} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="truncate">
@@ -139,7 +139,7 @@ export default function OddTechHero() {
                     style={{ animation: "autoScroll 5.2s ease-in-out both" }}
                   />
                 </AnimatePresence>
-                <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-ink/80 px-3 py-1 text-[0.7rem] font-semibold text-white backdrop-blur">
+                <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-night/80 px-3 py-1 text-[0.7rem] font-semibold text-white backdrop-blur">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-aqua" />
                   Live client work · {current.client}
                 </span>
@@ -149,7 +149,7 @@ export default function OddTechHero() {
 
           <ParallaxLayer mx={mx} my={my} depth={1.3} className="-right-1 -top-4 z-30 h-24 w-24 sm:h-32 sm:w-32 md:-right-6">
             <div className="relative h-full w-full rounded-full bg-white shadow-glow">
-              <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] text-ink">
+              <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite] text-night">
                 <defs>
                   <path id="ot-badge-ring" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" />
                 </defs>
@@ -181,7 +181,7 @@ export default function OddTechHero() {
           </ParallaxLayer>
 
           <ParallaxLayer mx={mx} my={my} depth={0.8} className="-bottom-2 right-0 z-20 hidden w-[15.5rem] sm:block md:-right-4">
-            <figure className="rounded-2xl bg-white p-4 text-ink shadow-lift">
+            <figure className="rounded-2xl bg-white p-4 text-night shadow-lift">
               <div className="flex gap-0.5 text-brand">
                 {Array.from({ length: 5 }).map((_, k) => (
                   <Icon key={k} name="star" className="h-3.5 w-3.5" />
@@ -190,13 +190,13 @@ export default function OddTechHero() {
               <blockquote className="mt-2 text-[0.82rem] font-medium leading-snug">
                 &ldquo;&hellip;seamless execution, and technical expertise made the entire process effortless.&rdquo;
               </blockquote>
-              <figcaption className="mt-2 text-xs text-muted">{nirwana.client}</figcaption>
+              <figcaption className="mt-2 text-xs text-night/60">{nirwana.client}</figcaption>
             </figure>
           </ParallaxLayer>
 
           <ParallaxLayer mx={mx} my={my} depth={1.6} className="-left-3 -top-3 z-30 md:-left-10 md:-top-5">
             <div
-              className="font-script rounded-md bg-aqua px-3 py-1.5 text-xl leading-none text-ink shadow-lift sm:px-4 sm:py-2 sm:text-2xl"
+              className="font-script rounded-md bg-aqua px-3 py-1.5 text-xl leading-none text-night shadow-lift sm:px-4 sm:py-2 sm:text-2xl"
               style={{ rotate: "-8deg" }}
             >
               Shipped with care!

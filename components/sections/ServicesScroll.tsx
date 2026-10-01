@@ -121,7 +121,7 @@ export default function ServicesScroll() {
               </ul>
               <span className="relative mt-7 inline-flex items-center gap-2 text-sm font-semibold">
                 Explore
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-1">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-surface text-ink transition-transform duration-300 group-hover:translate-x-1">
                   <Icon name="arrowRight" className="h-4 w-4" strokeWidth={2.2} />
                 </span>
               </span>

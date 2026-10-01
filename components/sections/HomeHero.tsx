@@ -21,12 +21,10 @@ const lines = [
 const stickers = [
   { t: "Branding", icon: "sparkles", pos: "left-[30%] top-[1%]", rot: "-8deg", depth: 1.4, cls: "bg-brand text-white" },
   { t: "Film & Photo", icon: "camera", pos: "right-[-3%] top-[16%]", rot: "7deg", depth: 1.8, cls: "bg-plum text-white" },
-  { t: "Social", icon: "megaphone", pos: "right-[-2%] top-[52%]", rot: "-5deg", depth: 1.2, cls: "bg-aqua text-ink" },
-  { t: "Events", icon: "calendar", pos: "left-[-2%] top-[48%]", rot: "6deg", depth: 1.6, cls: "bg-white text-ink" },
+  { t: "Social", icon: "megaphone", pos: "right-[-2%] top-[52%]", rot: "-5deg", depth: 1.2, cls: "bg-aqua text-night" },
+  { t: "Events", icon: "calendar", pos: "left-[-2%] top-[48%]", rot: "6deg", depth: 1.6, cls: "bg-white text-night" },
 ] as const;
 
-// Swatches follow the active theme.
-const palette = ["rgb(var(--brand))", "rgb(var(--aqua))", "rgb(var(--plum))", "rgb(var(--ink))"];
 
 function useRecTimer() {
   const [s, setS] = useState(0);
@@ -52,7 +50,7 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section onPointerMove={onPointerMove} className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-28 text-white lg:pt-32">
+    <section onPointerMove={onPointerMove} className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-night pt-28 text-white lg:pt-32">
       <Aurora intense />
       <div
         className="pointer-events-none absolute inset-0 hidden md:block"
@@ -63,7 +61,7 @@ export default function HomeHero() {
         {/* ---------- Copy ---------- */}
         <div className="min-w-0">
           <span className="fade-up inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 py-1.5 pl-1.5 pr-4 text-sm text-white/80 backdrop-blur">
-            <span className="whitespace-nowrap rounded-full bg-aqua px-2.5 py-0.5 text-xs font-bold text-ink">Since 2021</span>
+            <span className="whitespace-nowrap rounded-full bg-aqua px-2.5 py-0.5 text-xs font-bold text-night">Since 2021</span>
             <span className="sm:hidden">Creative agency · Pune</span>
             <span className="hidden sm:inline">Full-service creative agency · Pune</span>
           </span>
@@ -117,8 +115,8 @@ export default function HomeHero() {
               {["HJ", "SK", "NS", "ZL"].map((x, k) => (
                 <span
                   key={x}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink text-[0.7rem] font-bold ${
-                    ["bg-brand text-white", "bg-aqua text-ink", "bg-plum text-white", "bg-white text-ink"][k]
+                  className={`flex h-10 w-10 items-center justify-center rounded-full border-2 border-night text-[0.7rem] font-bold ${
+                    ["bg-brand text-white", "bg-aqua text-night", "bg-plum text-white", "bg-white text-night"][k]
                   }`}
                 >
                   {x}
@@ -151,7 +149,7 @@ export default function HomeHero() {
               ].map((c) => (
                 <span key={c} className={`absolute h-12 w-12 border-white/70 ${c}`} />
               ))}
-              <span className="absolute left-5 top-4 flex items-center gap-2 rounded-full bg-ink/60 px-2.5 py-1 font-mono text-[0.68rem] text-white/80 backdrop-blur">
+              <span className="absolute left-5 top-4 flex items-center gap-2 rounded-full bg-night/60 px-2.5 py-1 font-mono text-[0.68rem] text-white/80 backdrop-blur">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-plum" />
                 REC {rec}
               </span>
@@ -179,21 +177,9 @@ export default function HomeHero() {
             </ParallaxLayer>
           ))}
 
-          {/* Brand palette */}
-          <ParallaxLayer mx={mx} my={my} depth={1} className="bottom-[-4%] left-[18%] z-20 hidden sm:block">
-            <div className="card-dark border-white/15 bg-ink-2/90 p-3 shadow-lift backdrop-blur-md" style={{ rotate: "-4deg" }}>
-              <p className="mb-2 font-mono text-[0.62rem] uppercase tracking-wider text-white/50">Brand palette</p>
-              <div className="flex gap-1.5">
-                {palette.map((c, k) => (
-                  <span key={c} className="grow-bar h-9 w-7 rounded-md border border-white/10" style={{ background: c, animationDelay: `${1 + k * 0.12}s` }} />
-                ))}
-              </div>
-            </div>
-          </ParallaxLayer>
-
           {/* Now playing — brand film */}
           <ParallaxLayer mx={mx} my={my} depth={0.9} className="bottom-[4%] right-[-4%] z-20">
-            <div className="flex items-center gap-3 rounded-2xl bg-white px-3.5 py-3 text-ink shadow-lift" style={{ rotate: "3deg" }}>
+            <div className="flex items-center gap-3 rounded-2xl bg-white px-3.5 py-3 text-night shadow-lift" style={{ rotate: "3deg" }}>
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand to-plum text-white">
                 <svg viewBox="0 0 24 24" className="ml-0.5 h-4 w-4 fill-current" aria-hidden="true">
                   <path d="M7 5v14l12-7L7 5Z" />
@@ -201,7 +187,7 @@ export default function HomeHero() {
               </span>
               <span>
                 <span className="block text-xs font-bold">Now playing</span>
-                <span className="block text-[0.7rem] text-muted">Brand film · 0:30</span>
+                <span className="block text-[0.7rem] text-night/60">Brand film · 0:30</span>
               </span>
               <span className="flex h-6 items-end gap-0.5" aria-hidden="true">
                 {[0, 0.2, 0.4, 0.1, 0.3].map((d, k) => (
@@ -236,7 +222,7 @@ export default function HomeHero() {
 
           {/* Handwritten note */}
           <ParallaxLayer mx={mx} my={my} depth={1.9} className="bottom-[26%] right-[-6%] z-30 hidden md:block">
-            <span className="font-script inline-block rounded-md bg-aqua px-3 py-1.5 text-xl leading-none text-ink shadow-lift" style={{ rotate: "-6deg" }}>
+            <span className="font-script inline-block rounded-md bg-aqua px-3 py-1.5 text-xl leading-none text-night shadow-lift" style={{ rotate: "-6deg" }}>
               Hover to say hi!
             </span>
           </ParallaxLayer>

@@ -6,9 +6,9 @@ const variants = {
   // Gradient pill with a light sweep on hover
   primary:
     "relative overflow-hidden bg-gradient-to-r from-brand-deep via-brand to-plum text-white shadow-glow hover:shadow-lift before:absolute before:inset-y-0 before:-left-1/2 before:w-1/3 before:-skew-x-12 before:bg-white/25 before:transition-transform before:duration-700 hover:before:translate-x-[400%]",
-  secondary: "border border-line bg-white text-ink shadow-soft hover:border-brand/40 hover:text-brand",
-  dark: "bg-ink text-white hover:bg-brand-deep",
-  light: "bg-white text-ink hover:bg-brand-50",
+  secondary: "border border-line bg-surface text-ink shadow-soft hover:border-brand/40 hover:text-brand",
+  dark: "bg-night text-white hover:bg-brand-deep",
+  light: "bg-white text-night hover:bg-white/90",
   ghostLight: "border border-white/20 bg-white/5 text-white backdrop-blur hover:border-white/40 hover:bg-white/10",
 };
 

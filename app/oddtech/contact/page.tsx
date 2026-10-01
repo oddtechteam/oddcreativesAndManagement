@@ -53,7 +53,7 @@ export default function OddTechContact() {
               </span>
             </a>
 
-            <div className="grain relative overflow-hidden rounded-2xl bg-ink p-7 text-white">
+            <div className="grain relative overflow-hidden rounded-2xl bg-night p-7 text-white">
               <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/40 blur-3xl" />
               <p className="relative text-xs font-semibold uppercase tracking-[0.18em] text-aqua">What happens next</p>
               <ol className="relative mt-5 flex flex-col gap-5">

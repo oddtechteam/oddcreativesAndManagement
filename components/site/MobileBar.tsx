@@ -29,10 +29,10 @@ export default function MobileBar() {
   return (
     <>
       {/* Spacer so the bar never covers the end of the footer */}
-      <div className="h-20 bg-ink lg:hidden" aria-hidden="true" />
+      <div className="h-20 bg-night lg:hidden" aria-hidden="true" />
       <nav
         aria-label="Quick actions"
-        className={`fixed inset-x-3 bottom-3 z-40 flex items-center gap-2 rounded-2xl border border-white/10 bg-ink/85 p-2 shadow-lift backdrop-blur-xl transition-all duration-500 lg:hidden ${
+        className={`fixed inset-x-3 bottom-3 z-40 flex items-center gap-2 rounded-2xl border border-white/10 bg-night/85 p-2 shadow-lift backdrop-blur-xl transition-all duration-500 lg:hidden ${
           show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[130%] opacity-0"
         }`}
       >

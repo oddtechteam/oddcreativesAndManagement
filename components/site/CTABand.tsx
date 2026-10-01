@@ -24,7 +24,7 @@ export default function CTABand({
   return (
     <section className="bg-paper py-20 md:py-28">
       <Container>
-        <Reveal className="ring-aurora grain relative overflow-hidden rounded-[2.5rem] bg-ink px-7 py-16 text-center text-white md:px-16 md:py-24">
+        <Reveal className="ring-aurora grain relative overflow-hidden rounded-[2.5rem] bg-night px-7 py-16 text-center text-white md:px-16 md:py-24">
           <Aurora intense />
           <div className="relative mx-auto max-w-3xl">
             <span className="font-script inline-block rotate-[-4deg] text-3xl text-aqua">Let&apos;s build together</span>

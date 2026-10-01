@@ -30,18 +30,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Before first paint: mark JS as available (scroll-reveal) and apply the saved colour theme. */}
+        {/* Before first paint: mark JS as available (scroll-reveal) and apply the saved colour theme and light/dark mode. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('js');try{var t=localStorage.getItem('odd-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}",
+              "document.documentElement.classList.add('js');try{var d=document.documentElement,t=localStorage.getItem('odd-theme'),m=localStorage.getItem('odd-mode');if(t)d.dataset.theme=t;if(m)d.dataset.mode=m}catch(e){}",
           }}
         />
       </head>
       <body className={`${display.variable} ${body.variable} ${script.variable} ${mono.variable}`}>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
         >
           Skip to content
         </a>

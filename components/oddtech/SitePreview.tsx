@@ -31,7 +31,7 @@ export default function SitePreview({
       ref={ref}
       onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
       onPointerLeave={() => setHover(false)}
-      className="overflow-hidden rounded-2xl border border-line bg-white shadow-lift"
+      className="overflow-hidden rounded-2xl border border-line bg-surface shadow-lift"
     >
       {/* Browser chrome */}
       <div className="flex items-center gap-3 border-b border-line bg-paper px-4 py-2.5">
@@ -40,7 +40,7 @@ export default function SitePreview({
           <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
         </span>
-        <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-white px-3 py-1 font-mono text-[0.7rem] text-muted">
+        <span className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-1 font-mono text-[0.7rem] text-muted">
           <Icon name="shield" className="h-3 w-3 flex-shrink-0 text-aqua-deep" />
           <span className="truncate">{domain}</span>
         </span>
@@ -66,7 +66,7 @@ export default function SitePreview({
         />
         {/* Hint, fades away while previewing */}
         <span
-          className={`pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full bg-ink/80 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur transition-opacity duration-300 md:flex ${
+          className={`pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full bg-night/80 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur transition-opacity duration-300 md:flex ${
             hover ? "opacity-0" : "opacity-100"
           }`}
         >

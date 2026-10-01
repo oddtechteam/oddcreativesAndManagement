@@ -1,19 +1,13 @@
-import Image from "next/image";
+import OddMascot from "@/components/sections/OddMascot";
 
-// The "odd" mark, as transparent PNGs generated from public/logo-odd.png:
-// navy for light surfaces, white for dark ones.
-const RATIO = 374 / 240;
-
+// The Odd Creatives logo mark, drawn in theme colours (no image file).
+// `light` = for dark backgrounds (white letters); otherwise dark letters.
 export default function Logo({ size = 34, light = false }: { size?: number; light?: boolean }) {
   return (
-    <Image
-      src={light ? "/logo-odd-white.png" : "/logo-odd-navy.png"}
-      alt="Odd Creatives & Management"
-      width={Math.round(size * RATIO)}
-      height={size}
-      priority
-      className="flex-shrink-0"
-      style={{ height: size, width: "auto" }}
-    />
+    <span role="img" aria-label="Odd Creatives & Management" className="inline-flex flex-shrink-0">
+      <span style={{ height: size }} className="inline-flex">
+        <OddMascot compact accent={light ? "text-aqua" : "text-brand"} className={`h-full w-auto ${light ? "text-white" : "text-night"}`} />
+      </span>
+    </span>
   );
 }

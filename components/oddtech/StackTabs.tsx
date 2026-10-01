@@ -62,7 +62,7 @@ export default function StackTabs() {
                   key={item}
                   variants={{ hide: { opacity: 0, y: 12, scale: 0.96 }, show: { opacity: 1, y: 0, scale: 1 } }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="group flex items-center gap-3 rounded-xl border border-line bg-paper px-4 py-4 transition-colors hover:border-brand/40 hover:bg-white"
+                  className="group flex items-center gap-3 rounded-xl border border-line bg-paper px-4 py-4 transition-colors hover:border-brand/40 hover:bg-surface"
                 >
                   <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-plum font-mono text-xs font-medium text-white">
                     {item.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}

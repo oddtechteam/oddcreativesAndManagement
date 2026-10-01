@@ -19,7 +19,7 @@ export default function Industries() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {industries.map((ind, i) => (
           <Reveal key={ind.t} delay={(i % 4) * 0.06}>
-            <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-transparent hover:shadow-lift md:p-7">
+            <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-surface p-6 transition-all duration-500 hover:-translate-y-1 hover:border-transparent hover:shadow-lift md:p-7">
               {/* Gradient wash that slides up on hover */}
               <div className="absolute inset-0 translate-y-full bg-gradient-to-br from-brand to-plum transition-transform duration-500 ease-out group-hover:translate-y-0" />
               <div className="relative">
