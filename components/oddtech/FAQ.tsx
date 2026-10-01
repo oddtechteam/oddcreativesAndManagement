@@ -25,7 +25,7 @@ export default function FAQ() {
               Ask a question
             </Button>
             <Button href={oddtech.phone.href} variant="secondary" size="md" arrow={false}>
-              {oddtech.phone.label}
+              Call us
             </Button>
           </div>
         </Reveal>

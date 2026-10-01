@@ -69,7 +69,7 @@ export default function ContactPage() {
             <div className="card relative flex-1 overflow-hidden p-0">
               <iframe
                 src={site.mapEmbed}
-                title={`${site.name} — studio location`}
+                title={`${site.name} studio location`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="h-64 w-full lg:h-full lg:min-h-64"

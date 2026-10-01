@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import OddTechLogo from "@/components/OddTechLogo";
 import Icon from "@/components/ui/Icon";
 import Marquee from "@/components/ui/Marquee";
 import { Container } from "@/components/ui/Section";
@@ -24,11 +24,8 @@ export default function OddTechFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1.3fr_0.7fr_1fr]">
           <div className="max-w-sm">
             <Link href="/oddtech" className="flex items-center gap-3">
-              <Logo size={40} light />
-              <span className="leading-tight">
-                <span className="font-display block text-xl font-bold text-aqua">Tech</span>
-                <span className="block text-[0.66rem] uppercase tracking-[0.2em] text-white/45">IT Solutions</span>
-              </span>
+              <OddTechLogo badge size={44} />
+              <span className="block text-[0.66rem] uppercase tracking-[0.2em] text-white/45">IT Solutions</span>
             </Link>
             <p className="mt-6 text-sm leading-relaxed text-white/55">{oddtech.intro}</p>
             <p className="font-mono mt-5 text-xs text-aqua/80">{oddtech.tagline}</p>
@@ -99,7 +96,7 @@ export default function OddTechFooter() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
           <span>
-            © {new Date().getFullYear()} {oddtech.name} — the technology arm of{" "}
+            © {new Date().getFullYear()} {oddtech.name}, the technology arm of{" "}
             <Link href="/" className="text-white/70 hover:text-aqua">
               {site.name}
             </Link>

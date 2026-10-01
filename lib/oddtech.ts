@@ -8,7 +8,7 @@ export const oddtech = {
   tagline: "Innovate. Integrate. Elevate.",
   sub: "Not ordinary. Just oddly effective.",
   intro:
-    "The technology arm of Odd Creatives & Management — building websites, apps, stores, and business systems that scale with the business, not just launch and stall.",
+    "The technology arm of Odd Creatives & Management, building websites, apps, stores, and business systems that scale with the business, not just launch and stall.",
   email: "oddtechteam@gmail.com",
   phone: { label: "+91 9922575715", href: "tel:+919922575715" },
   whatsapp: "https://wa.me/919922575715",
@@ -23,14 +23,6 @@ export const oddtechNav = [
   { href: "/oddtech/contact", label: "Contact" },
 ];
 
-// Grounded in what the business already states elsewhere on the site.
-export const highlights = [
-  { value: "100%", label: "Custom-built, zero templates" },
-  { value: "24/7", label: "Support available" },
-  { value: "3", label: "Platforms: Web, Android & iOS" },
-  { value: "2021", label: "Building since" },
-];
-
 export type TechService = {
   key: string;
   icon: IconName;
@@ -38,6 +30,7 @@ export type TechService = {
   short: string;
   long: string;
   deliverables: string[];
+  isNew?: boolean; // shows a "New" badge (recently launched)
 };
 
 export const services: TechService[] = [
@@ -50,11 +43,29 @@ export const services: TechService[] = [
     deliverables: ["Corporate & business websites", "Landing pages", "CMS-powered sites", "Speed & SEO optimisation"],
   },
   {
+    key: "seo",
+    icon: "trending",
+    title: "SEO & Performance Marketing",
+    short: "Get found on Google, then turn clicks into customers.",
+    long: "Search optimisation and paid campaigns run on data. We fix what holds your site back, target the searches that matter, and track every rupee from click to enquiry.",
+    deliverables: ["SEO audits & technical fixes", "Keyword research & on-page SEO", "Google & Meta ad campaigns", "Analytics, tracking & monthly reports"],
+    isNew: true,
+  },
+  {
+    key: "linkedin",
+    icon: "linkedin",
+    title: "LinkedIn Management",
+    short: "A business LinkedIn presence that builds trust and leads.",
+    long: "We run your company page and leadership profiles (content, posting, and engagement) so decision-makers see your brand consistently and reach out.",
+    deliverables: ["Company page setup & optimisation", "Founder & leadership profiles", "Content calendar & regular posting", "Lead generation & outreach"],
+    isNew: true,
+  },
+  {
     key: "mobile",
     icon: "smartphone",
     title: "Mobile App Development",
     short: "Android & iOS apps built to actually ship.",
-    long: "Native and cross-platform apps — fast, reliable, secure — from first prototype to Play Store and App Store launch.",
+    long: "Fast, reliable, secure native and cross-platform apps, from first prototype to Play Store and App Store launch.",
     deliverables: ["Android apps", "iOS apps", "Cross-platform apps", "Store publishing & updates"],
   },
   {
@@ -78,7 +89,7 @@ export const services: TechService[] = [
     icon: "users",
     title: "CRM Solutions",
     short: "Leads, sales & customers in one place.",
-    long: "CRM systems set up around how you actually sell — pipelines, follow-ups, automation, and reporting.",
+    long: "CRM systems set up around how you actually sell: pipelines, follow-ups, automation, and reporting.",
     deliverables: ["CRM setup & customisation", "Sales pipelines", "Workflow automation", "Integrations with your tools"],
   },
   {
@@ -86,7 +97,7 @@ export const services: TechService[] = [
     icon: "palette",
     title: "UI/UX Design",
     short: "Interfaces people enjoy using.",
-    long: "Research-led product design — from wireframes to polished, on-brand interfaces and reusable design systems.",
+    long: "Research-led product design, from wireframes to polished, on-brand interfaces and reusable design systems.",
     deliverables: ["Wireframes & prototypes", "UI design", "Design systems", "Usability reviews"],
   },
   {
@@ -94,7 +105,7 @@ export const services: TechService[] = [
     icon: "shield",
     title: "Cyber Security",
     short: "Robust, scalable protection.",
-    long: "Find and fix weak spots before someone else does — audits, hardening, and data protection for your systems.",
+    long: "Find and fix weak spots before someone else does: audits, hardening, and data protection for your systems.",
     deliverables: ["Security audits", "Vulnerability assessment", "Secure configuration", "Data protection & backups"],
   },
   {
@@ -102,7 +113,7 @@ export const services: TechService[] = [
     icon: "cloud",
     title: "Cloud & Hosting",
     short: "Infrastructure that stays up.",
-    long: "Cloud setup, hosting, domains and monitoring — the infrastructure and systems setup behind a reliable product.",
+    long: "Cloud setup, hosting, domains and monitoring: the infrastructure and systems setup behind a reliable product.",
     deliverables: ["Cloud setup & migration", "Hosting & domains", "Monitoring & backups", "Infrastructure setup"],
   },
   {
@@ -113,6 +124,15 @@ export const services: TechService[] = [
     long: "Ongoing technical support, updates and performance audits so your systems keep running as you grow.",
     deliverables: ["Technical support", "Updates & maintenance", "Performance audits", "IT consulting"],
   },
+];
+
+// Grounded in what the business already states elsewhere on the site.
+// (Defined after `services` so the count stays in sync.)
+export const highlights = [
+  { value: String(services.length), label: "Services under one roof" },
+  { value: "24/7", label: "Support available" },
+  { value: "3", label: "Platforms: Web, Android & iOS" },
+  { value: "2023", label: "Building since" },
 ];
 
 export const industries: { icon: IconName; t: string; d: string }[] = [
@@ -147,8 +167,8 @@ export const devProcess = [
 
 export const reasons: { icon: IconName; t: string; d: string }[] = [
   { icon: "code", t: "100% custom-built", d: "No templates. Every product is designed and engineered around your business." },
-  { icon: "layers", t: "Design to deployment", d: "Strategy, UI/UX, development, and launch — one accountable team." },
-  { icon: "sparkles", t: "Backed by a creative agency", d: "Branding and marketing from Odd Creatives, under the same roof." },
+  { icon: "layers", t: "Design to deployment", d: "Strategy, UI/UX, development, and launch by one accountable team." },
+  { icon: "palette", t: "Backed by a creative agency", d: "Branding and marketing from Odd Creatives, under the same roof." },
   { icon: "trending", t: "Built to scale", d: "Architecture that grows with the business, not just launch and stall." },
   { icon: "shield", t: "Security-first", d: "Secure configuration, protected data, and regular audits." },
   { icon: "headset", t: "24/7 support available", d: "We stay with you after launch with support and maintenance." },
@@ -198,7 +218,7 @@ export const work: WorkItem[] = [
     industry: "Fashion & E-commerce",
     url: "https://www.zurriiluxury.com/",
     image: "/work/zurrii.jpg",
-    summary: "An online store for exclusive chikankari garments for women — collections, new arrivals, and a premium shopping experience.",
+    summary: "An online store for exclusive chikankari garments for women, with collections, new arrivals, and a premium shopping experience.",
     services: ["UI/UX Design", "E-commerce Development"],
     quote:
       "From UI/UX design to development, the Odd Creatives team delivered a premium website that aligns perfectly with our luxury brand identity. Their professionalism, responsiveness, and commitment to quality exceeded our expectations.",
@@ -209,7 +229,7 @@ export const work: WorkItem[] = [
     industry: "Hospitality & Travel",
     url: "https://nirwanastays.com/",
     image: "/work/nirwana.jpg",
-    summary: "A lake-view resort in Lonavala — Pawna Lake camping, glamping, and nature stays, with destinations, offers, and stay listings.",
+    summary: "A lake-view resort in Lonavala offering Pawna Lake camping, glamping, and nature stays, with destinations, offers, and stay listings.",
     services: ["Website Design", "Web Development"],
     quote:
       "Odd Creatives designed and developed a modern, high-performing website that perfectly reflects our hospitality experience. Their attention to detail, seamless execution, and technical expertise made the entire process effortless.",
@@ -220,7 +240,7 @@ export const work: WorkItem[] = [
     industry: "Education",
     url: "https://www.sahyadriworldschool.com/",
     image: "/work/sahyadri.jpg",
-    summary: "A school website for Chikhali, Pimpri-Chinchwad — holistic education, campus facilities, and admissions for 2026–27.",
+    summary: "A school website for Chikhali, Pimpri-Chinchwad, covering holistic education, campus facilities, and admissions for 2026-27.",
     services: ["Website Design", "Web Development"],
     featured: true,
   },
@@ -229,7 +249,7 @@ export const work: WorkItem[] = [
     industry: "Manufacturing Group",
     url: "https://lakheglobal.com/",
     image: "/work/lakhe.jpg",
-    summary: "The corporate website of the Lakhe Group of Companies — a diversified Pune-based group spanning sixteen businesses.",
+    summary: "The corporate website of the Lakhe Group of Companies, a diversified Pune-based group spanning sixteen businesses.",
     services: ["Website Design", "Web Development"],
   },
   {
@@ -237,7 +257,7 @@ export const work: WorkItem[] = [
     industry: "Public Figure",
     url: "https://apurvasamant.org/",
     image: "/work/apurva.jpg",
-    summary: "The official Marathi-language website of youth leader Apurva Samant, Lanja-Rajapur — initiatives, schemes, and grassroots work.",
+    summary: "The official Marathi-language website of youth leader Apurva Samant, Lanja-Rajapur, covering initiatives, schemes, and grassroots work.",
     services: ["Website Design", "Web Development"],
   },
 ];
@@ -246,7 +266,7 @@ export const work: WorkItem[] = [
 export const faqs = [
   {
     q: "How much does a website or app cost?",
-    a: "It depends on scope — pages, features, integrations, and platforms. Share your requirements and we'll send a detailed proposal with a clear, itemised quote.",
+    a: "It depends on scope: pages, features, integrations, and platforms. Share your requirements and we'll send a detailed proposal with a clear, itemised quote.",
   },
   {
     q: "How long does a project take?",
@@ -262,11 +282,11 @@ export const faqs = [
   },
   {
     q: "Do you provide support after launch?",
-    a: "Yes. Support & maintenance plans cover updates, security patches, monitoring, and backups — with 24/7 support available.",
+    a: "Yes. Support & maintenance plans cover updates, security patches, monitoring, and backups, with 24/7 support available.",
   },
   {
     q: "Will I own the code and design?",
-    a: "Yes — once the project is complete, the source code, designs, and accounts are handed over to you.",
+    a: "Yes. Once the project is complete, the source code, designs, and accounts are handed over to you.",
   },
   {
     q: "Do you work with clients outside Pune?",
@@ -276,6 +296,8 @@ export const faqs = [
 
 export const projectTypes = [
   "Website",
+  "SEO & performance marketing",
+  "LinkedIn management",
   "Mobile app",
   "E-commerce store",
   "Custom software / web app",
@@ -287,5 +309,5 @@ export const projectTypes = [
   "Something else",
 ];
 
-export const budgets = ["Under ₹1L", "₹1L – 5L", "₹5L – 15L", "₹15L+", "Not sure yet"];
-export const timelines = ["ASAP", "Within 1 month", "1–3 months", "Flexible"];
+export const budgets = ["Under ₹1L", "₹1L to 5L", "₹5L to 15L", "₹15L+", "Not sure yet"];
+export const timelines = ["ASAP", "Within 1 month", "1 to 3 months", "Flexible"];

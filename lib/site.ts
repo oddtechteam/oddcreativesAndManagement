@@ -109,17 +109,17 @@ export const techPanels = [
 export const advantages: { icon: IconName; t: string; d: string }[] = [
   { icon: "lightbulb", t: "Think Beyond Ordinary", d: "Bold ideas backed by strategic thinking and purposeful creativity." },
   { icon: "target", t: "Research-Led Strategy", d: "Every decision starts with understanding your market, audience, and business objectives." },
-  { icon: "layers", t: "One Creative Ecosystem", d: "Marketing, technology, production, and branding working together — not in silos." },
+  { icon: "layers", t: "One Creative Ecosystem", d: "Marketing, technology, production, and branding working together, not in silos." },
   { icon: "zap", t: "Fast Without Compromise", d: "Agile execution with uncompromising attention to detail and quality." },
-  { icon: "sparkles", t: "Designed Around You", d: "Every project is custom-built to match your vision — not ours." },
-  { icon: "trending", t: "Results That Matter", d: "We measure success by business growth, stronger brands, and lasting impact — not vanity metrics." },
+  { icon: "target", t: "Designed Around You", d: "Every project is custom-built to match your vision, not ours." },
+  { icon: "trending", t: "Results That Matter", d: "We measure success by business growth, stronger brands, and lasting impact, not vanity metrics." },
 ];
 
 export const process = [
   { t: "Discover", d: "Understand the business, the audience, and the real problem behind the brief." },
-  { t: "Strategy", d: "Turn that understanding into a plan — positioning, channels, and a timeline." },
+  { t: "Strategy", d: "Turn that understanding into a plan: positioning, channels, and a timeline." },
   { t: "Design", d: "Shape the idea into something people can see, feel, and react to." },
-  { t: "Develop", d: "Build it — site, campaign, film, event — to spec and on schedule." },
+  { t: "Develop", d: "Build it, whether it's a site, campaign, film or event, to spec and on schedule." },
   { t: "Launch & Grow", d: "Ship it, measure it, and keep sharpening based on real results." },
 ];
 
@@ -163,11 +163,14 @@ export const clients = [
   "Zee Marathi",
   "OLA",
   "Amazon",
+  "Ecovastu Builders",
+  "Sakshe Foods",
+  "Dr. Kajale",
 ];
 
 export const about = {
   intro:
-    "Odd Creatives & Management was founded with one belief — every brand has a unique story waiting to be told. What started as a small creative vision has evolved into a multidisciplinary company bringing together branding, marketing, technology, production, event execution, and digital innovation under one roof.",
+    "Odd Creatives & Management was founded with one belief: every brand has a unique story waiting to be told. What started as a small creative vision has evolved into a multidisciplinary company bringing together branding, marketing, technology, production, event execution, and digital innovation under one roof.",
   intro2:
     "Today, we help businesses transform ideas into experiences, challenges into opportunities, and ambitions into measurable success.",
   mission: {
@@ -180,14 +183,14 @@ export const about = {
   },
   values: [
     {
-      icon: "sparkles" as IconName,
+      icon: "lightbulb" as IconName,
       t: "Creativity Without Limits",
       d: "Every challenge is an opportunity to think differently. We embrace bold ideas that help brands stand out in an ordinary world.",
     },
     {
       icon: "target" as IconName,
       t: "Strategy That Matters",
-      d: "Behind every design, campaign, and experience is a clear purpose — creating measurable impact for your business.",
+      d: "Behind every design, campaign, and experience is a clear purpose: creating measurable impact for your business.",
     },
     {
       icon: "handshake" as IconName,
@@ -205,7 +208,7 @@ export const about = {
     {
       y: "2021",
       t: "The Beginning",
-      d: "Odd Creatives was founded in Rajgurunagar with one vision — to help businesses tell meaningful stories through creativity, innovation, and purpose.",
+      d: "Odd Creatives was founded in Rajgurunagar with one vision: to help businesses tell meaningful stories through creativity, innovation, and purpose.",
     },
     {
       y: "2022",
@@ -215,7 +218,7 @@ export const about = {
     {
       y: "2023",
       t: "Growing Beyond Creative",
-      d: "Expanded into web development, IT solutions, multimedia production, and integrated marketing — creating a complete creative ecosystem under one roof.",
+      d: "Expanded into web development, IT solutions, multimedia production, and integrated marketing, creating a complete creative ecosystem under one roof.",
     },
     {
       y: "2024",

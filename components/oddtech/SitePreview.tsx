@@ -51,7 +51,7 @@ export default function SitePreview({
       <div className={`relative overflow-hidden bg-paper ${className}`}>
         <motion.img
           src={src}
-          alt={`${title} website — full page screenshot`}
+          alt={`${title} website, full page screenshot`}
           loading="lazy"
           decoding="async"
           width={1200}

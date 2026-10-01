@@ -8,12 +8,12 @@ import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Icon, { type IconName } from "@/components/ui/Icon";
 import OddMascot from "@/components/sections/OddMascot";
-import ThemeSwitcher from "./ThemeSwitcher";
+import OddTechLogo from "@/components/OddTechLogo";
 import ModeToggle from "./ModeToggle";
 import { categories, nav, site } from "@/lib/site";
 import { oddtech, oddtechNav, services } from "@/lib/oddtech";
 
-type MegaItem = { icon: IconName; title: string; desc: string; href: string };
+type MegaItem = { icon: IconName; title: string; desc: string; href: string; isNew?: boolean };
 
 // Two brands share one header: the agency site, and the OddTech mini-site.
 // No phone numbers are shown in the navbar (by request).
@@ -47,7 +47,7 @@ const brands = {
     back: { label: "Odd Creatives", href: "/" },
     mega: {
       href: "/oddtech/services",
-      items: services.map((s) => ({ icon: s.icon, title: s.title, desc: s.short, href: `/oddtech/services#${s.key}` })) as MegaItem[],
+      items: services.map((s) => ({ icon: s.icon, title: s.title, desc: s.short, href: `/oddtech/services#${s.key}`, isNew: s.isNew })) as MegaItem[],
       featured: { eyebrow: "Live work", title: "See sites we've shipped", desc: "Hover-scroll through real client websites.", href: "/oddtech/work" },
       cols: "grid-cols-3",
     },
@@ -63,56 +63,6 @@ function RollText({ children }: { children: string }) {
         {children}
       </span>
     </span>
-  );
-}
-
-// Palette button + dropdown (used where the inline swatches don't fit).
-function ThemeMenu() {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: PointerEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("pointerdown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("pointerdown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-label="Appearance: light/dark and colour theme"
-        title="Appearance"
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/80 transition-colors hover:border-white/25 hover:text-white"
-      >
-        <Icon name="palette" className="h-[1.1rem] w-[1.1rem]" />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.96 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full mt-3 origin-top-right rounded-2xl border border-white/10 bg-ink-2/95 p-4 shadow-lift backdrop-blur-xl"
-          >
-            <p className="mb-3 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Appearance</p>
-            <ModeToggle withLabel />
-            <p className="mb-3 mt-4 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Colour theme</p>
-            <ThemeSwitcher />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
   );
 }
 
@@ -183,24 +133,33 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
     >
       {/* ---------- Floating island ---------- */}
       <div
-        className={`ring-aurora relative mx-auto flex max-w-site items-center justify-between gap-3 rounded-full pl-3 pr-2 transition-all duration-500 before:opacity-50 md:pl-4 ${
+        className={`relative mx-auto flex max-w-site items-center justify-between gap-3 rounded-full border pl-2 pr-2 transition-all duration-500 ${
           scrolled || open || mega
-            ? "h-14 bg-night/80 shadow-lift backdrop-blur-xl before:opacity-90"
-            : "h-16 bg-ink/30 backdrop-blur-md"
+            ? "h-14 border-white/10 bg-night/95 shadow-lift backdrop-blur-xl"
+            : "h-16 border-white/[0.08] bg-night/80 backdrop-blur-md"
         }`}
       >
         {/* Soft inner sheen */}
         <span className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
-        <Link href={b.home} className="group flex items-center gap-2.5" aria-label={`${b.name} — home`}>
-          <span className="block transition-transform duration-500 group-hover:-rotate-3 group-hover:scale-105">
-            <OddMascot compact className={`w-auto transition-all duration-500 ${scrolled ? "h-8" : "h-9"}`} />
-          </span>
-          <span className={`leading-tight text-white ${variant === "oddtech" ? "block" : "hidden sm:block"}`}>
-            <span className={`font-display block font-bold ${variant === "oddtech" ? "text-aurora text-[1.15rem]" : "text-[1rem]"}`}>
-              {b.title}
+        <Link href={b.home} className="group flex items-center gap-2.5" aria-label={`${b.name} home`}>
+          {variant === "oddtech" ? (
+            <span className="block transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-105">
+              <OddTechLogo badge size={scrolled ? 26 : 30} />
             </span>
-            <span className="block text-[0.6rem] font-medium uppercase tracking-[0.22em] text-white/50">{b.sub}</span>
+          ) : (
+          /* The logo as printed: dark letters and red hands on its bright badge */
+          <span
+            className={`flex items-center justify-center rounded-full bg-aqua px-3 transition-all duration-500 group-hover:-rotate-3 group-hover:scale-105 ${
+              scrolled ? "h-10" : "h-12"
+            }`}
+          >
+            <OddMascot compact accent="text-brand" className={`w-auto text-night transition-all duration-500 ${scrolled ? "h-7" : "h-8"}`} />
+          </span>
+          )}
+          <span className={`leading-tight text-white hidden sm:block`}>
+            {variant !== "oddtech" && <span className="font-display block text-[1rem] font-bold">{b.title}</span>}
+            <span className="block text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-aqua">{b.sub}</span>
           </span>
         </Link>
 
@@ -217,26 +176,33 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                 aria-haspopup={isMega ? "true" : undefined}
                 aria-expanded={isMega ? mega : undefined}
                 className={`group/link relative flex items-center gap-1 rounded-full px-4 py-2 text-[0.9rem] font-medium transition-colors duration-300 ${
-                  active ? "text-white" : "text-white/70 hover:text-white"
+                  active ? "text-night" : "text-white/75 hover:text-white"
                 }`}
               >
                 {hovered === l.href && !active && (
                   <motion.span
                     layoutId={`hover-pill-${variant}`}
-                    className="absolute inset-0 rounded-full bg-white/10"
+                    className="absolute inset-0 rounded-full bg-white/[0.08]"
                     transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   />
                 )}
                 {active && (
                   <motion.span
                     layoutId={`nav-pill-${variant}`}
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-deep via-brand to-plum shadow-glow"
+                    className="absolute inset-0 rounded-full bg-aqua"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
                 <span className="relative">
                   <RollText>{l.label}</RollText>
                 </span>
+                {!active && (
+                  <span
+                    className={`absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-brand transition-all duration-300 ${
+                      hovered === l.href ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                    }`}
+                  />
+                )}
                 {isMega && (
                   <svg
                     viewBox="0 0 24 24"
@@ -273,7 +239,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                       className="pointer-events-auto origin-top"
                     >
                       <div className="grain relative overflow-hidden rounded-3xl border border-white/10 bg-ink-2 p-3 shadow-lift">
-                        <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand/30 blur-3xl" />
+                        <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand/20 blur-3xl" />
                         <div className="relative grid grid-cols-[1fr_15rem] gap-3">
                           <ul className={`grid ${b.mega.cols} gap-1`}>
                             {b.mega.items.map((it, i) => (
@@ -288,7 +254,12 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                                     <Icon name={it.icon} className="h-[1.1rem] w-[1.1rem]" />
                                   </span>
                                   <span className="min-w-0">
-                                    <span className="block text-sm font-semibold text-white">{it.title}</span>
+                                    <span className="block text-sm font-semibold text-white">
+                                      {it.title}
+                                      {it.isNew && (
+                                        <span className="ml-1.5 rounded-full bg-aqua px-1.5 py-0.5 align-middle text-[0.6rem] font-bold uppercase text-night">New</span>
+                                      )}
+                                    </span>
                                     <span className="mt-0.5 block text-xs leading-snug text-white/50">{it.desc}</span>
                                   </span>
                                 </Link>
@@ -297,14 +268,16 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                           </ul>
                           <Link
                             href={b.mega.featured.href}
-                            className="group/feat relative flex flex-col justify-end overflow-hidden rounded-2xl bg-gradient-to-br from-brand-deep via-brand to-plum p-5 text-white"
+                            className="group/feat relative flex flex-col justify-end overflow-hidden rounded-2xl bg-aqua p-5 text-night"
                           >
-                            <div className="bg-grid absolute inset-0 opacity-40" />
-                            <Icon name="sparkles" className="absolute right-4 top-4 h-8 w-8 text-white/40 transition-transform duration-500 group-hover/feat:rotate-12 group-hover/feat:scale-110" />
-                            <span className="relative text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/70">{b.mega.featured.eyebrow}</span>
+                            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full border-[14px] border-night/10" />
+                            <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white transition-transform duration-500 group-hover/feat:rotate-45">
+                              <Icon name="arrowUpRight" className="h-4 w-4" strokeWidth={2.4} />
+                            </span>
+                            <span className="relative text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-night/60">{b.mega.featured.eyebrow}</span>
                             <span className="font-display relative mt-1 text-xl font-bold leading-tight">{b.mega.featured.title}</span>
-                            <span className="relative mt-1 text-xs text-white/75">{b.mega.featured.desc}</span>
-                            <span className="relative mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
+                            <span className="relative mt-1 text-xs text-night/70">{b.mega.featured.desc}</span>
+                            <span className="relative mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-night px-3.5 py-1.5 text-sm font-semibold text-white">
                               Explore
                               <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover/feat:translate-x-1" strokeWidth={2.2} />
                             </span>
@@ -334,23 +307,20 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
               {b.back.label}
             </Link>
           )}
-          {/* Theme options for every visitor: inline swatches when there's room, a palette menu otherwise */}
-          <div className="hidden items-center gap-2 xl:flex">
+          <div className="hidden lg:block">
             <ModeToggle />
-            <ThemeSwitcher size="sm" />
-          </div>
-          <div className="hidden lg:block xl:hidden">
-            <ThemeMenu />
           </div>
           <div className="hidden lg:block">
-            <Button href={b.cta.href} size="md">
+            <Button href={b.cta.href} size="md" variant="accent">
               {b.cta.label}
             </Button>
           </div>
 
           {/* Mobile: animated hamburger */}
           <button
-            className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white text-night shadow-glow lg:hidden"
+            className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300 lg:hidden ${
+              open ? "bg-white text-night" : "bg-aqua text-night"
+            }`}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
@@ -370,7 +340,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
         {/* Reading-progress line */}
         <motion.span
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-x-8 bottom-0 h-[2px] origin-left rounded-full bg-gradient-to-r from-brand via-plum to-aqua transition-opacity duration-500 ${
+          className={`pointer-events-none absolute inset-x-8 bottom-0 h-[2px] origin-left rounded-full bg-gradient-to-r from-brand to-aqua transition-opacity duration-500 ${
             scrolled && !open ? "opacity-100" : "opacity-0"
           }`}
           style={{ scaleX: progress }}
@@ -387,10 +357,12 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                 animate={{ clipPath: "circle(150% at calc(100% - 2.6rem) 2.6rem)" }}
                 exit={{ clipPath: "circle(0% at calc(100% - 2.6rem) 2.6rem)" }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="grain fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-night lg:hidden"
+                className="fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-aqua text-night lg:hidden"
               >
-                <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-brand/40 blur-3xl" />
-                <div className="pointer-events-none absolute -left-24 bottom-24 h-72 w-72 rounded-full bg-aqua/20 blur-3xl" />
+                {/* Big faint logo mark in the corner */}
+                {variant === "main" && (
+                  <OddMascot compact accent="text-night/[0.06]" className="pointer-events-none absolute -bottom-6 -right-10 h-56 w-auto text-night/[0.06]" />
+                )}
 
                 <div className="relative flex min-h-full flex-col px-6 pb-8 pt-28">
                   <nav className="flex flex-col" aria-label="Mobile">
@@ -403,16 +375,16 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         >
-                          <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-baseline gap-4 border-b border-white/10 py-4">
-                            <span className="font-mono text-xs text-white/35">{String(i + 1).padStart(2, "0")}</span>
-                            <span className={`font-display text-[2rem] font-bold leading-none ${active ? "text-aurora" : "text-white"}`}>{l.label}</span>
-                            <Icon name="arrowUpRight" className="ml-auto h-5 w-5 self-center text-white/30 transition-transform group-active:translate-x-1" />
+                          <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-baseline gap-4 border-b border-night/15 py-4">
+                            <span className="font-mono text-xs font-medium text-brand">{String(i + 1).padStart(2, "0")}</span>
+                            <span className={`font-display text-[2rem] font-bold leading-none ${active ? "text-brand" : "text-night"}`}>{l.label}</span>
+                            <Icon name="arrowUpRight" className="ml-auto h-5 w-5 self-center text-night/40 transition-transform group-active:translate-x-1" />
                           </Link>
                         </motion.div>
                       );
                     })}
                     {b.back && (
-                      <Link href={b.back.href} onClick={() => setOpen(false)} className="mt-5 flex items-center gap-2 text-sm font-medium text-white/60">
+                      <Link href={b.back.href} onClick={() => setOpen(false)} className="mt-5 flex items-center gap-2 text-sm font-semibold text-night/70">
                         <Icon name="arrowRight" className="h-4 w-4 rotate-180" />
                         Back to {b.back.label}
                       </Link>
@@ -426,30 +398,26 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                     className="mt-auto flex flex-col gap-5 pt-10"
                   >
                     <div className="grid grid-cols-2 gap-3">
-                      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-2xl bg-night p-4">
                         <Icon name="chat" className="h-5 w-5 text-aqua" />
                         <span className="mt-3 block text-xs text-white/50">WhatsApp</span>
                         <span className="block text-sm font-semibold text-white">Chat with us</span>
                       </a>
-                      <a href={`mailto:${b.email}`} className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                      <a href={`mailto:${b.email}`} className="min-w-0 rounded-2xl bg-night p-4">
                         <Icon name="mail" className="h-5 w-5 text-aqua" />
                         <span className="mt-3 block text-xs text-white/50">Email</span>
                         <span className="block text-sm font-semibold text-white">Write to us</span>
                       </a>
                     </div>
 
-                    <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                    <div className="flex flex-col gap-3 rounded-2xl bg-night px-4 py-3">
                       <div className="flex items-center justify-between gap-3">
                         <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Mode</span>
                         <ModeToggle withLabel />
                       </div>
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Colour</span>
-                        <ThemeSwitcher />
-                      </div>
                     </div>
 
-                    <Button href={b.cta.href} className="w-full" magnetic={false}>
+                    <Button href={b.cta.href} className="w-full" variant="dark" magnetic={false}>
                       {b.cta.mobile}
                     </Button>
 
@@ -461,7 +429,7 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={s.label}
-                          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/75"
+                          className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-night text-night transition-colors hover:bg-night hover:text-aqua"
                         >
                           <Icon name={s.icon} className="h-5 w-5" />
                         </a>

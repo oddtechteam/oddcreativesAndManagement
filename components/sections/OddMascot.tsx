@@ -27,7 +27,7 @@ function Hand({ x, y, delay, accent }: { x: number; y: number; delay: string; ac
 }
 
 // `compact` = small inline use (logo): no glow, no aria label duplication.
-// `accent` = text-colour class for the hands.
+// `accent` = text-colour class for the hands. Letters are white unless `className` sets a text colour.
 export default function OddMascot({
   className = "",
   compact = false,
@@ -78,8 +78,8 @@ export default function OddMascot({
       viewBox={`0 0 ${VB.w} ${VB.h}`}
       role={compact ? undefined : "img"}
       aria-hidden={compact || undefined}
-      aria-label={compact ? undefined : "Odd Creatives mascot — the odd logo, smiling and waving"}
-      className={`overflow-visible text-white ${className}`}
+      aria-label={compact ? undefined : "Odd Creatives mascot: the odd logo, smiling and waving"}
+      className={`overflow-visible ${/(^|\s)text-/.test(className) ? "" : "text-white"} ${className}`}
       onPointerEnter={() => setHappy(true)}
       onPointerLeave={() => setHappy(false)}
       style={compact ? undefined : { filter: "drop-shadow(0 20px 40px rgb(var(--brand) / 0.45))" }}

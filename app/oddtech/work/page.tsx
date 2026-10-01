@@ -17,7 +17,7 @@ export default function OddTechWork() {
             Live sites, <span className="text-aurora">designed & shipped.</span>
           </>
         }
-        lead="Websites our team has designed, built, and launched for businesses across fashion, hospitality, education, manufacturing, and public life. Hover a preview to scroll through it — or open it live."
+        lead="Websites our team has designed, built, and launched for businesses across fashion, hospitality, education, manufacturing, and public life. Hover a preview to scroll through it, or open it live."
       >
         <div className="flex flex-wrap gap-2">
           {work.map((w) => (

@@ -16,7 +16,7 @@ export default function ServiceCards() {
             Everything you need to <span className="text-aurora">build, launch & run.</span>
           </>
         }
-        lead="Nine core services, one accountable team — from the first wireframe to 24/7 support after launch."
+        lead="Eleven core services, one accountable team, from the first wireframe to 24/7 support after launch."
         action={
           <Button href="/oddtech/services" variant="secondary">
             All services
@@ -32,7 +32,11 @@ export default function ServiceCards() {
                   <IconBadge tone={i % 2 ? "aqua" : "brand"} size="lg">
                     <Icon name={s.icon} className="h-6 w-6" />
                   </IconBadge>
-                  <span className="font-mono text-xs text-muted/60">{String(i + 1).padStart(2, "0")}</span>
+                  {s.isNew ? (
+                    <span className="rounded-full bg-aqua px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wider text-night">New</span>
+                  ) : (
+                    <span className="font-mono text-xs text-muted/60">{String(i + 1).padStart(2, "0")}</span>
+                  )}
                 </div>
                 <h3 className="font-display mt-7 text-xl font-extrabold text-ink">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.short}</p>

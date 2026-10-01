@@ -14,7 +14,7 @@ const filters = [{ key: "all", title: "All work" }, ...categories.map((c) => ({ 
 const covers = [
   "from-brand to-brand-soft",
   "from-night to-brand-deep",
-  "from-aqua-deep to-aqua",
+  "from-ink-3 to-night",
   "from-brand-deep to-night",
 ];
 

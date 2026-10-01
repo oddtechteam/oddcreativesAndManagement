@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -14,6 +15,12 @@ const isOddTech = (p: string) => {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  // OddTech pages use their own logo palette (see [data-site] in globals.css).
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isOddTech(pathname)) root.dataset.site = "oddtech";
+    else delete root.dataset.site;
+  }, [pathname]);
   return <Header key={isOddTech(pathname) ? "oddtech" : "main"} variant={isOddTech(pathname) ? "oddtech" : "main"} />;
 }
 

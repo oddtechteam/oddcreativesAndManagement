@@ -74,7 +74,7 @@ export default function QuoteForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-aqua-50 text-aqua-deep">
           <Icon name="check" className="h-7 w-7" strokeWidth={2.4} />
         </span>
-        <h3 className="font-display text-3xl font-extrabold text-ink">Thanks — your brief is in.</h3>
+        <h3 className="font-display text-3xl font-extrabold text-ink">Thanks, your brief is in.</h3>
         <p className="text-muted">The OddTech team will get back to you within one business day.</p>
       </div>
     );
@@ -134,7 +134,7 @@ export default function QuoteForm() {
 
       {status === "error" && (
         <p className="rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-deep">
-          Something went wrong — please try again, or email oddtechteam@gmail.com.
+          Something went wrong. Please try again, or email oddtechteam@gmail.com.
         </p>
       )}
 

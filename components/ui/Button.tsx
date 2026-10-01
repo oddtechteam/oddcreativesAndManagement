@@ -8,6 +8,10 @@ const variants = {
     "relative overflow-hidden bg-gradient-to-r from-brand-deep via-brand to-plum text-white shadow-glow hover:shadow-lift before:absolute before:inset-y-0 before:-left-1/2 before:w-1/3 before:-skew-x-12 before:bg-white/25 before:transition-transform before:duration-700 hover:before:translate-x-[400%]",
   secondary: "border border-line bg-surface text-ink shadow-soft hover:border-brand/40 hover:text-brand",
   dark: "bg-night text-white hover:bg-brand-deep",
+  // Bright accent pill (yellow on Odd Creatives) with dark text
+  accent: "bg-aqua text-night hover:bg-white",
+  // Outline for bright (yellow) backgrounds
+  outlineDark: "border-2 border-night text-night hover:bg-night hover:text-aqua",
   light: "bg-white text-night hover:bg-white/90",
   ghostLight: "border border-white/20 bg-white/5 text-white backdrop-blur hover:border-white/40 hover:bg-white/10",
 };

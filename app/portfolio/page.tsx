@@ -15,7 +15,7 @@ export default function PortfolioPage() {
             Brands we&apos;ve <span className="text-aurora">helped grow.</span>
           </>
         }
-        lead="Filter by category and open any project for the full case study — challenge, approach, and result."
+        lead="Filter by category and open any project for the full case study: challenge, approach, and result."
       />
       <PortfolioGrid />
       <CTABand title="Want your brand on this list?" cta="Start a project" />

@@ -15,11 +15,11 @@ const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 const script = Caveat({ subsets: ["latin"], weight: ["700"], variable: "--font-flourish" });
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
-export const viewport = { themeColor: "#0b0b16" };
+export const viewport = { themeColor: "#111111" };
 
 export const metadata: Metadata = {
   title: {
-    default: "Odd Creatives & Management — Creative Agency in Pune",
+    default: "Odd Creatives & Management | Creative Agency in Pune",
     template: "%s · Odd Creatives & Management",
   },
   description:
@@ -30,11 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Before first paint: mark JS as available (scroll-reveal) and apply the saved colour theme and light/dark mode. */}
+        {/* Before first paint: mark JS as available (scroll-reveal) and use OddTech's palette on /oddtech pages, and apply the saved light/dark mode. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('js');try{var d=document.documentElement,t=localStorage.getItem('odd-theme'),m=localStorage.getItem('odd-mode');if(t)d.dataset.theme=t;if(m)d.dataset.mode=m}catch(e){}",
+              "document.documentElement.classList.add('js');try{var d=document.documentElement;if(/^\\/oddtech(\\.html)?(\\/|$)/.test(location.pathname))d.dataset.site='oddtech';var m=localStorage.getItem('odd-mode');if(m)d.dataset.mode=m}catch(e){}",
           }}
         />
       </head>

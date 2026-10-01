@@ -33,7 +33,7 @@ export default function Footer() {
           {["Let's make it odd", "Start a project", "Let's make it odd", "Say hello"].map((t, i) => (
             <span key={i} className="font-display flex items-center whitespace-nowrap px-8 text-6xl font-extrabold md:text-8xl">
               <span className={i % 2 ? "text-white/20 transition-colors group-hover:text-white/40" : "text-aurora"}>{t}</span>
-              <Icon name="sparkles" className="ml-16 h-10 w-10 text-aqua md:h-14 md:w-14" />
+              <span className="ml-16 h-5 w-5 rounded-full bg-aqua md:h-7 md:w-7" />
             </span>
           ))}
         </Marquee>
@@ -110,7 +110,7 @@ export default function Footer() {
 
             <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-aqua">Newsletter</p>
             {status === "sent" ? (
-              <p className="mt-3 text-sm text-white/70">Thanks — you&apos;re on the list.</p>
+              <p className="mt-3 text-sm text-white/70">Thanks, you&apos;re on the list.</p>
             ) : (
               <form
                 onSubmit={onSubscribe}
@@ -139,7 +139,7 @@ export default function Footer() {
                 </button>
               </form>
             )}
-            {status === "error" && <p className="mt-2 text-xs text-white/60">Couldn&apos;t sign you up — please try again.</p>}
+            {status === "error" && <p className="mt-2 text-xs text-white/60">Couldn&apos;t sign you up. Please try again.</p>}
           </div>
         </div>
 

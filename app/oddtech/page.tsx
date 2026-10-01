@@ -29,7 +29,7 @@ export default function OddTechHome() {
             From idea to launch, <span className="text-aurora">without the chaos.</span>
           </>
         }
-        lead="Six clear stages with demos along the way — so you always know what's done, what's next, and when you'll go live."
+        lead="Six clear stages with demos along the way, so you always know what's done, what's next, and when you'll go live."
       />
       <Engagement />
       <FAQ />
@@ -39,7 +39,7 @@ export default function OddTechHome() {
             Turn your idea into an <span className="text-aurora">app, store, or system.</span>
           </>
         }
-        lead="Tell us what you want to build — we'll scope it, design it, and ship it."
+        lead="Tell us what you want to build. We'll scope it, design it, and ship it."
         cta="Let's build it"
         href="/oddtech/contact"
         phone={oddtech.phone}

@@ -1,5 +1,4 @@
 import Marquee from "@/components/ui/Marquee";
-import Icon from "@/components/ui/Icon";
 import { categories } from "@/lib/site";
 
 const items = categories.flatMap((c) => c.services);
@@ -9,11 +8,11 @@ export default function KineticBand() {
   return (
     <section className="relative overflow-hidden bg-paper py-16 md:py-24" aria-label="Our services at a glance">
       <div className="-rotate-[2deg] scale-105">
-        <Marquee seconds={55} pauseOnHover={false} className="bg-aurora py-4 md:py-5">
+        <Marquee seconds={55} pauseOnHover={false} className="bg-aqua py-4 md:py-5">
           {items.map((t) => (
-            <span key={t} className="font-display flex items-center whitespace-nowrap px-6 text-2xl font-bold text-white md:text-4xl">
+            <span key={t} className="font-display flex items-center whitespace-nowrap px-6 text-2xl font-bold text-night md:text-4xl">
               {t}
-              <Icon name="sparkles" className="ml-12 h-6 w-6 text-white/70" />
+              <span className="ml-12 h-3 w-3 rounded-full bg-brand" />
             </span>
           ))}
         </Marquee>

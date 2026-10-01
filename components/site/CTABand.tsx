@@ -10,7 +10,7 @@ export default function CTABand({
       Every great brand begins with <span className="text-aurora">one bold decision.</span>
     </>
   ),
-  lead = "Whether you're launching a startup, scaling an established business, or reimagining your brand — let's create something people don't just see, but remember.",
+  lead = "Whether you're launching a startup, scaling an established business, or reimagining your brand, let's create something people don't just see, but remember.",
   cta = "Book a consultation",
   href = "/contact",
   phone = site.phones[0],
@@ -33,7 +33,7 @@ export default function CTABand({
             <div className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
               <Button href={href}>{cta}</Button>
               <Button href={phone.href} variant="ghostLight" arrow={false}>
-                Call {phone.label}
+                Call us
               </Button>
             </div>
           </div>

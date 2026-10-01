@@ -22,7 +22,7 @@ export default function OddTechServices() {
             Build, launch, secure <span className="text-aurora">& scale.</span>
           </>
         }
-        lead="Nine services that cover the full life of a digital product — from UI/UX and development to cloud, security, and 24/7 support."
+        lead="Eleven services that cover the full life of a digital product, from UI/UX and development to SEO, marketing, cloud, security, and 24/7 support."
       >
         <div className="flex flex-wrap gap-2">
           {services.map((s) => (
@@ -32,6 +32,7 @@ export default function OddTechServices() {
               className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/85 backdrop-blur transition-colors hover:border-aqua hover:text-white"
             >
               {s.title}
+              {s.isNew && <span className="ml-2 rounded-full bg-aqua px-1.5 py-0.5 text-[0.65rem] font-bold uppercase text-night">New</span>}
             </a>
           ))}
         </div>
@@ -48,6 +49,7 @@ export default function OddTechServices() {
                       <Icon name={s.icon} className="h-6 w-6" />
                     </IconBadge>
                     <span className="font-mono text-sm text-muted">{String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}</span>
+                    {s.isNew && <span className="rounded-full bg-aqua px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wider text-night">New</span>}
                   </div>
                   <h2 className="font-display mt-7 text-3xl font-extrabold text-ink md:text-4xl">{s.title}</h2>
                   <p className="mt-2 font-semibold text-brand">{s.short}</p>
@@ -97,7 +99,7 @@ export default function OddTechServices() {
             Not sure which service <span className="text-aurora">you need?</span>
           </>
         }
-        lead="Tell us the problem you're solving — we'll recommend the right mix of design, development, and infrastructure."
+        lead="Tell us the problem you're solving and we'll recommend the right mix of design, development, and infrastructure."
         cta="Talk to OddTech"
         href="/oddtech/contact"
         phone={oddtech.phone}

@@ -17,7 +17,7 @@ export default function AboutPage() {
         eyebrow="About us"
         title={
           <>
-            More than a company — <span className="text-aurora">a creative movement.</span>
+            More than a company, <span className="text-aurora">a creative movement.</span>
           </>
         }
         lead={about.intro}

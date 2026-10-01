@@ -38,7 +38,7 @@ export default function WorkShowcase() {
             Live sites we&apos;ve <span className="text-aurora">designed & shipped.</span>
           </>
         }
-        lead="Real products for real businesses — hover a preview to scroll through the site, or open it live."
+        lead="Real products for real businesses. Hover a preview to scroll through the site, or open it live."
         action={
           <Button href="/oddtech/work" variant="secondary">
             View All

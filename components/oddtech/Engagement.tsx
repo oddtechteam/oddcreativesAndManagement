@@ -15,7 +15,7 @@ export default function Engagement() {
             Flexible engagement, <span className="text-aurora">clear commitments.</span>
           </>
         }
-        lead="Pick the model that fits your project today — and switch as your needs change."
+        lead="Pick the model that fits your project today, and switch as your needs change."
       />
       <div className="grid gap-6 lg:grid-cols-3">
         {engagement.map((m, i) => (

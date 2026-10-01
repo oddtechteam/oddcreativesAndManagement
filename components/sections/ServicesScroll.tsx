@@ -11,9 +11,9 @@ import { categories } from "@/lib/site";
 // One bright gradient per discipline (kept dark enough for white text).
 const tones = [
   "from-brand-deep to-brand",
-  "from-aqua-deeper to-aqua-deep",
+  "from-night to-ink-3",
   "from-plum to-brand",
-  "from-brand to-aqua-deep",
+  "from-ink-2 to-brand-deep",
 ];
 
 // Desktop: the section pins and the service cards glide sideways as you scroll.

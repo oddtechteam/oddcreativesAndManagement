@@ -16,7 +16,7 @@ export default function WhyOddTech() {
             Engineering with a <span className="text-aurora">creative edge.</span>
           </h2>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-white/60">
-            We&apos;re developers who sit next to strategists, designers, and marketers — so what we build doesn&apos;t
+            We&apos;re developers who sit next to strategists, designers, and marketers, so what we build doesn&apos;t
             just work, it gets used.
           </p>
           <div className="mt-9">

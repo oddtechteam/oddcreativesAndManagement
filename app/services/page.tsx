@@ -22,7 +22,7 @@ export default function ServicesPage() {
             Creative solutions, <span className="text-aurora">built for growth.</span>
           </>
         }
-        lead="From branding and digital marketing to technology, production, and events, we bring every creative discipline together under one roof — delivering tailored solutions that help businesses grow, connect, and stand out."
+        lead="From branding and digital marketing to technology, production, and events, we bring every creative discipline together under one roof, delivering tailored solutions that help businesses grow, connect, and stand out."
       >
         <div className="flex flex-wrap gap-2">
           {categories.map((c) => (
@@ -79,7 +79,7 @@ export default function ServicesPage() {
       <Advantages />
       <CTABand
         title="Not sure which service you need?"
-        lead="Tell us the problem you're trying to solve — we'll recommend the right mix of strategy, creative, and technology."
+        lead="Tell us the problem you're trying to solve and we'll recommend the right mix of strategy, creative, and technology."
         cta="Tell us the problem"
       />
     </main>

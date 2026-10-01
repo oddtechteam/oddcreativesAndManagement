@@ -39,7 +39,7 @@ export default function Process({
       From vision to reality, <span className="text-aurora">in five steps.</span>
     </>
   ),
-  lead = "A clear, repeatable process — so you always know what's happening, what's next, and why.",
+  lead = "A clear, repeatable process, so you always know what's happening, what's next, and why.",
   id,
 }: {
   steps?: StepData[];

@@ -19,7 +19,7 @@ export default function StackTabs() {
             A modern stack, <span className="text-aurora">chosen for your project.</span>
           </>
         }
-        lead="We pick proven tools that fit your goals, budget, and team — not whatever is trending this week."
+        lead="We pick proven tools that fit your goals, budget, and team, not whatever is trending this week."
       />
 
       <div className="mx-auto max-w-4xl">
@@ -46,32 +46,61 @@ export default function StackTabs() {
           ))}
         </div>
 
-        <div className="card mt-10 min-h-[15rem] p-6 md:p-10" role="tabpanel">
-          {/* initial={false}: first tab renders visible (even without JS); later switches animate */}
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.ul
-              key={current.key}
-              initial="hide"
-              animate="show"
-              exit="hide"
-              variants={{ show: { transition: { staggerChildren: 0.05 } }, hide: {} }}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-3"
-            >
-              {current.items.map((item) => (
-                <motion.li
-                  key={item}
-                  variants={{ hide: { opacity: 0, y: 12, scale: 0.96 }, show: { opacity: 1, y: 0, scale: 1 } }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="group flex items-center gap-3 rounded-xl border border-line bg-paper px-4 py-4 transition-colors hover:border-brand/40 hover:bg-surface"
-                >
-                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-plum font-mono text-xs font-medium text-white">
-                    {item.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}
-                  </span>
-                  <span className="font-medium text-ink">{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </AnimatePresence>
+        {/* Shown as a config file in a code editor */}
+        <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-night text-white shadow-lift" role="tabpanel">
+          <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-brand-soft/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-aqua/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+            <span className="ml-3 font-mono text-xs text-white/60">stack/{current.key}.json</span>
+            <span className="ml-auto font-mono text-xs text-white/35">{current.items.length} tools</span>
+          </div>
+          <div className="min-h-[15rem] px-5 py-6 font-mono text-sm md:px-8 md:py-8">
+            <p>
+              <span className="text-white/45">{"{"}</span>
+            </p>
+            <p className="pl-5">
+              <span className="text-brand-soft">&quot;category&quot;</span>
+              <span className="text-white/45">: </span>
+              <span className="text-aqua">&quot;{current.label}&quot;</span>
+              <span className="text-white/45">,</span>
+            </p>
+            <p className="pl-5">
+              <span className="text-brand-soft">&quot;tools&quot;</span>
+              <span className="text-white/45">: [</span>
+            </p>
+            {/* initial={false}: first tab renders visible (even without JS); later switches animate */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.ul
+                key={current.key}
+                initial="hide"
+                animate="show"
+                exit="hide"
+                variants={{ show: { transition: { staggerChildren: 0.05 } }, hide: {} }}
+                className="my-2 grid grid-cols-1 gap-2 pl-10 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {current.items.map((item, k) => (
+                  <motion.li
+                    key={item}
+                    variants={{ hide: { opacity: 0, x: -10 }, show: { opacity: 1, x: 0 } }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="group flex items-center gap-2 rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 transition-colors hover:border-aqua/40 hover:bg-aqua/[0.06]"
+                  >
+                    <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-aqua/60 transition-colors group-hover:bg-aqua" />
+                    <span className="text-aqua">&quot;{item}&quot;</span>
+                    {k < current.items.length - 1 && <span className="text-white/45">,</span>}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </AnimatePresence>
+            <p className="pl-5">
+              <span className="text-white/45">]</span>
+            </p>
+            <p>
+              <span className="text-white/45">{"}"}</span>
+              <span className="caret ml-1 inline-block h-[1.1em] w-[0.5em] translate-y-[0.2em] bg-aqua" />
+            </p>
+          </div>
         </div>
       </div>
     </Section>

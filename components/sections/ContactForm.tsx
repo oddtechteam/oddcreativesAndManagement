@@ -4,7 +4,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/Icon";
 import { SHEET_ENDPOINT } from "@/lib/sheetEndpoint";
 
-const budgets = ["Under ₹1L", "₹1L – 5L", "₹5L – 15L", "₹15L+"];
+const budgets = ["Under ₹1L", "₹1L to 5L", "₹5L to 15L", "₹15L+"];
 
 function Field({ label, htmlFor, children, optional }: { label: string; htmlFor: string; children: React.ReactNode; optional?: boolean }) {
   return (
@@ -41,7 +41,7 @@ export default function ContactForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-aqua-50 text-aqua-deep">
           <Icon name="check" className="h-7 w-7" strokeWidth={2.4} />
         </span>
-        <h3 className="font-display text-3xl font-extrabold text-ink">Thanks — we&apos;ve got it.</h3>
+        <h3 className="font-display text-3xl font-extrabold text-ink">Thanks, we&apos;ve got it.</h3>
         <p className="text-muted">We&apos;ll reply within one business day, usually faster.</p>
       </div>
     );
@@ -92,7 +92,7 @@ export default function ContactForm() {
 
       {status === "error" && (
         <p className="rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-deep">
-          Something went wrong sending that — please try again, or email us directly.
+          Something went wrong sending that. Please try again, or email us directly.
         </p>
       )}
 

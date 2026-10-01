@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, type MotionValue } from "framer-motion
 import { Container, Eyebrow } from "@/components/ui/Section";
 
 const text =
-  "Every brand has a unique story waiting to be told. We bring branding, marketing, technology, production and events under one roof — and turn ideas into experiences, challenges into opportunities, and ambitions into measurable success.";
+  "Every brand has a unique story waiting to be told. We bring branding, marketing, technology, production and events under one roof, and turn ideas into experiences, challenges into opportunities, and ambitions into measurable success.";
 // Words rendered in the aurora gradient once lit.
 const accent = new Set(["story", "one", "roof", "measurable", "success."]);
 

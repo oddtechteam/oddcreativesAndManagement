@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Get a Quote" };
 const next = [
   { t: "We review your brief", d: "The team reads your requirements and comes back with questions." },
   { t: "Free consultation call", d: "A quick call to understand goals, users, and must-haves." },
-  { t: "Proposal & quote", d: "A clear scope, timeline, and itemised quote — no surprises." },
+  { t: "Proposal & quote", d: "A clear scope, timeline, and itemised quote. No surprises." },
 ];
 
 export default function OddTechContact() {
