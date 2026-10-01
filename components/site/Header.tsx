@@ -5,14 +5,17 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import Logo from "@/components/Logo";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
+import Icon, { type IconName } from "@/components/ui/Icon";
+import OddMascot from "@/components/sections/OddMascot";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { nav, site } from "@/lib/site";
-import { oddtech, oddtechNav } from "@/lib/oddtech";
+import { categories, nav, site } from "@/lib/site";
+import { oddtech, oddtechNav, services } from "@/lib/oddtech";
+
+type MegaItem = { icon: IconName; title: string; desc: string; href: string };
 
 // Two brands share one header: the agency site, and the OddTech mini-site.
+// No phone numbers are shown in the navbar (by request).
 const brands = {
   main: {
     home: "/",
@@ -24,6 +27,12 @@ const brands = {
     phone: site.phones[0],
     email: site.email,
     back: null as null | { label: string; href: string },
+    mega: {
+      href: "/services",
+      items: categories.map((c) => ({ icon: c.icon, title: c.title, desc: c.tagline, href: `/services#${c.key}` })) as MegaItem[],
+      featured: { eyebrow: "Technology arm", title: "OddTech IT Solutions", desc: "Websites, apps, stores & business systems.", href: "/oddtech" },
+      cols: "grid-cols-2",
+    },
   },
   oddtech: {
     home: "/oddtech",
@@ -35,10 +44,28 @@ const brands = {
     phone: oddtech.phone,
     email: oddtech.email,
     back: { label: "Odd Creatives", href: "/" },
+    mega: {
+      href: "/oddtech/services",
+      items: services.map((s) => ({ icon: s.icon, title: s.title, desc: s.short, href: `/oddtech/services#${s.key}` })) as MegaItem[],
+      featured: { eyebrow: "Live work", title: "See sites we've shipped", desc: "Hover-scroll through real client websites.", href: "/oddtech/work" },
+      cols: "grid-cols-3",
+    },
   },
 };
 
-// Palette button + dropdown holding the theme picker (desktop).
+// Link label that rolls up to a duplicate on hover.
+function RollText({ children }: { children: string }) {
+  return (
+    <span className="relative block h-[1.3em] overflow-hidden leading-[1.3em]">
+      <span className="block transition-transform duration-300 ease-out group-hover/link:-translate-y-full">{children}</span>
+      <span className="absolute inset-x-0 top-full block transition-transform duration-300 ease-out group-hover/link:-translate-y-full" aria-hidden="true">
+        {children}
+      </span>
+    </span>
+  );
+}
+
+// Palette button + dropdown (used where the inline swatches don't fit).
 function ThemeMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -91,6 +118,8 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
   // Normalise "/x.html" and trailing slashes (some static hosts) for active-link matching.
   const pathname = (usePathname() || "/").replace(/\.html$/, "").replace(/(.)\/+$/, "$1");
   const [open, setOpen] = useState(false);
+  const [mega, setMega] = useState(false);
+  const megaTimer = useRef<ReturnType<typeof setTimeout>>();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -99,7 +128,10 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30 });
 
   useEffect(() => setMounted(true), []);
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+    setMega(false);
+  }, [pathname]);
 
   // Compact on scroll; tuck away when scrolling down, return when scrolling up.
   useEffect(() => {
@@ -107,7 +139,10 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
-      setHidden(y > 500 && y > last + 2);
+      if (y > 500 && y > last + 2) {
+        setHidden(true);
+        setMega(false);
+      }
       if (y < last - 2) setHidden(false);
       last = y;
     };
@@ -122,10 +157,20 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
     else window.__lenis?.start();
   }, [open]);
 
+  const openMega = () => {
+    clearTimeout(megaTimer.current);
+    setMega(true);
+  };
+  const closeMega = () => {
+    clearTimeout(megaTimer.current);
+    megaTimer.current = setTimeout(() => setMega(false), 140);
+  };
+
   // Section anchors (#...) are never "current"; brand home matches exactly.
   const isActive = (href: string) =>
     !href.includes("#") && (href === b.home ? pathname === b.home : pathname.startsWith(href));
   const links = b.links.filter((l) => l.href !== b.cta.href);
+  const whatsapp = `https://wa.me/${b.phone.href.replace(/\D/g, "")}`;
 
   return (
     <header
@@ -135,39 +180,41 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
     >
       {/* ---------- Floating island ---------- */}
       <div
-        className={`relative mx-auto flex max-w-site items-center justify-between gap-3 rounded-full border pl-4 pr-2 transition-all duration-500 md:pl-5 ${
-          scrolled || open
-            ? "h-14 border-white/10 bg-ink/75 shadow-lift backdrop-blur-xl"
-            : "h-16 border-white/[0.08] bg-white/[0.03] backdrop-blur-md"
+        className={`ring-aurora relative mx-auto flex max-w-site items-center justify-between gap-3 rounded-full pl-3 pr-2 transition-all duration-500 before:opacity-50 md:pl-4 ${
+          scrolled || open || mega
+            ? "h-14 bg-ink/80 shadow-lift backdrop-blur-xl before:opacity-90"
+            : "h-16 bg-ink/30 backdrop-blur-md"
         }`}
       >
-        {/* Hairline highlight along the top edge */}
-        <span className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+        {/* Soft inner sheen */}
+        <span className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
         <Link href={b.home} className="group flex items-center gap-2.5" aria-label={`${b.name} — home`}>
-          <span className="origin-bottom transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:scale-110">
-            <Logo size={scrolled ? 30 : 34} light />
+          <span className="block transition-transform duration-500 group-hover:-rotate-3 group-hover:scale-105">
+            <OddMascot compact className={`w-auto transition-all duration-500 ${scrolled ? "h-8" : "h-9"}`} />
           </span>
           <span className={`leading-tight text-white ${variant === "oddtech" ? "block" : "hidden sm:block"}`}>
-            <span className={`font-display block font-bold ${variant === "oddtech" ? "text-aqua text-[1.1rem]" : "text-[1rem]"}`}>
+            <span className={`font-display block font-bold ${variant === "oddtech" ? "text-aurora text-[1.15rem]" : "text-[1rem]"}`}>
               {b.title}
             </span>
-            <span className="block text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/50">{b.sub}</span>
+            <span className="block text-[0.6rem] font-medium uppercase tracking-[0.22em] text-white/50">{b.sub}</span>
           </span>
         </Link>
 
-        {/* Desktop links with a hover pill that glides between items */}
+        {/* Desktop links: gliding hover pill, rolling labels, Services mega-menu */}
         <nav className="hidden items-center lg:flex" aria-label="Main" onMouseLeave={() => setHovered(null)}>
           {links.map((l) => {
             const active = isActive(l.href);
-            return (
+            const isMega = l.href === b.mega.href;
+            const link = (
               <Link
-                key={l.href}
                 href={l.href}
                 onMouseEnter={() => setHovered(l.href)}
                 aria-current={active ? "page" : undefined}
-                className={`relative rounded-full px-4 py-2 text-[0.9rem] font-medium transition-colors duration-300 ${
-                  active ? "text-ink" : "text-white/70 hover:text-white"
+                aria-haspopup={isMega ? "true" : undefined}
+                aria-expanded={isMega ? mega : undefined}
+                className={`group/link relative flex items-center gap-1 rounded-full px-4 py-2 text-[0.9rem] font-medium transition-colors duration-300 ${
+                  active ? "text-white" : "text-white/70 hover:text-white"
                 }`}
               >
                 {hovered === l.href && !active && (
@@ -180,32 +227,115 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                 {active && (
                   <motion.span
                     layoutId={`nav-pill-${variant}`}
-                    className="absolute inset-0 rounded-full bg-white shadow-glow"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-deep via-brand to-plum shadow-glow"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className="relative">{l.label}</span>
+                <span className="relative">
+                  <RollText>{l.label}</RollText>
+                </span>
+                {isMega && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    className={`relative h-3.5 w-3.5 transition-transform duration-300 ${mega ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
               </Link>
+            );
+            if (!isMega) return <span key={l.href}>{link}</span>;
+            return (
+              <div
+                key={l.href}
+                onMouseEnter={openMega}
+                onMouseLeave={closeMega}
+                onFocus={openMega}
+                onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && closeMega()}
+              >
+                {link}
+                {/* Centring lives on this plain wrapper; the inner motion.div owns transform for its animation. */}
+                <div className="pointer-events-none absolute left-1/2 top-full w-[min(56rem,calc(100vw-2.5rem))] -translate-x-1/2 pt-3">
+                <AnimatePresence>
+                  {mega && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                      className="pointer-events-auto origin-top"
+                    >
+                      <div className="grain relative overflow-hidden rounded-3xl border border-white/10 bg-ink-2 p-3 shadow-lift">
+                        <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand/30 blur-3xl" />
+                        <div className="relative grid grid-cols-[1fr_15rem] gap-3">
+                          <ul className={`grid ${b.mega.cols} gap-1`}>
+                            {b.mega.items.map((it, i) => (
+                              <motion.li
+                                key={it.href}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.03 * i, duration: 0.25 }}
+                              >
+                                <Link href={it.href} className="group/item flex gap-3 rounded-2xl p-3 transition-colors hover:bg-white/[0.06]">
+                                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-aqua transition-all duration-300 group-hover/item:scale-110 group-hover/item:bg-brand group-hover/item:text-white">
+                                    <Icon name={it.icon} className="h-[1.1rem] w-[1.1rem]" />
+                                  </span>
+                                  <span className="min-w-0">
+                                    <span className="block text-sm font-semibold text-white">{it.title}</span>
+                                    <span className="mt-0.5 block text-xs leading-snug text-white/50">{it.desc}</span>
+                                  </span>
+                                </Link>
+                              </motion.li>
+                            ))}
+                          </ul>
+                          <Link
+                            href={b.mega.featured.href}
+                            className="group/feat relative flex flex-col justify-end overflow-hidden rounded-2xl bg-gradient-to-br from-brand-deep via-brand to-plum p-5 text-white"
+                          >
+                            <div className="bg-grid absolute inset-0 opacity-40" />
+                            <Icon name="sparkles" className="absolute right-4 top-4 h-8 w-8 text-white/40 transition-transform duration-500 group-hover/feat:rotate-12 group-hover/feat:scale-110" />
+                            <span className="relative text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/70">{b.mega.featured.eyebrow}</span>
+                            <span className="font-display relative mt-1 text-xl font-bold leading-tight">{b.mega.featured.title}</span>
+                            <span className="relative mt-1 text-xs text-white/75">{b.mega.featured.desc}</span>
+                            <span className="relative mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
+                              Explore
+                              <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover/feat:translate-x-1" strokeWidth={2.2} />
+                            </span>
+                          </Link>
+                        </div>
+                        <div className="relative mt-2 flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3 text-sm">
+                          <span className="text-white/60">Not sure what you need?</span>
+                          <Link href={b.cta.href} className="inline-flex items-center gap-1.5 font-semibold text-aqua hover:text-white">
+                            Talk to us
+                            <Icon name="arrowRight" className="h-4 w-4" strokeWidth={2.2} />
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                </div>
+              </div>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-2">
-          {b.back ? (
-            <Link
-              href={b.back.href}
-              className="group mr-1 hidden items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white xl:flex"
-            >
+          {b.back && (
+            <Link href={b.back.href} className="group mr-1 hidden items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white 2xl:flex">
               <Icon name="arrowRight" className="h-4 w-4 rotate-180 transition-transform group-hover:-translate-x-0.5" />
               {b.back.label}
             </Link>
-          ) : (
-            <a href={b.phone.href} className="mr-1 hidden items-center gap-2 text-sm font-medium text-white/70 hover:text-white xl:flex">
-              <Icon name="phone" className="h-4 w-4 text-aqua" />
-              {b.phone.label}
-            </a>
           )}
-          <div className="hidden lg:block">
+          {/* Theme options for every visitor: inline swatches when there's room, a palette menu otherwise */}
+          <div className="hidden xl:block">
+            <ThemeSwitcher size="sm" />
+          </div>
+          <div className="hidden lg:block xl:hidden">
             <ThemeMenu />
           </div>
           <div className="hidden lg:block">
@@ -222,21 +352,13 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
             onClick={() => setOpen((o) => !o)}
           >
             <span className="relative block h-3.5 w-5" aria-hidden="true">
-              <span
-                className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${
-                  open ? "top-1.5 rotate-45" : "top-0"
-                }`}
-              />
+              <span className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
               <span
                 className={`absolute left-0 top-1.5 h-[2px] rounded-full bg-current transition-all duration-300 ${
                   open ? "w-0 opacity-0" : "w-3.5 opacity-100"
                 }`}
               />
-              <span
-                className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${
-                  open ? "top-1.5 -rotate-45" : "top-3"
-                }`}
-              />
+              <span className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
             </span>
           </button>
         </div>
@@ -277,19 +399,10 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         >
-                          <Link
-                            href={l.href}
-                            onClick={() => setOpen(false)}
-                            className="group flex items-baseline gap-4 border-b border-white/10 py-4"
-                          >
+                          <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-baseline gap-4 border-b border-white/10 py-4">
                             <span className="font-mono text-xs text-white/35">{String(i + 1).padStart(2, "0")}</span>
-                            <span className={`font-display text-[2rem] font-bold leading-none ${active ? "text-aurora" : "text-white"}`}>
-                              {l.label}
-                            </span>
-                            <Icon
-                              name="arrowUpRight"
-                              className="ml-auto h-5 w-5 self-center text-white/30 transition-transform group-active:translate-x-1"
-                            />
+                            <span className={`font-display text-[2rem] font-bold leading-none ${active ? "text-aurora" : "text-white"}`}>{l.label}</span>
+                            <Icon name="arrowUpRight" className="ml-auto h-5 w-5 self-center text-white/30 transition-transform group-active:translate-x-1" />
                           </Link>
                         </motion.div>
                       );
@@ -309,19 +422,19 @@ export default function Header({ variant = "main" }: { variant?: keyof typeof br
                     className="mt-auto flex flex-col gap-5 pt-10"
                   >
                     <div className="grid grid-cols-2 gap-3">
-                      <a href={b.phone.href} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                        <Icon name="phone" className="h-5 w-5 text-aqua" />
-                        <span className="mt-3 block text-xs text-white/50">Call us</span>
-                        <span className="block text-sm font-semibold text-white">{b.phone.label}</span>
+                      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                        <Icon name="chat" className="h-5 w-5 text-aqua" />
+                        <span className="mt-3 block text-xs text-white/50">WhatsApp</span>
+                        <span className="block text-sm font-semibold text-white">Chat with us</span>
                       </a>
                       <a href={`mailto:${b.email}`} className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
                         <Icon name="mail" className="h-5 w-5 text-aqua" />
                         <span className="mt-3 block text-xs text-white/50">Email</span>
-                        <span className="block truncate text-sm font-semibold text-white">{b.email}</span>
+                        <span className="block text-sm font-semibold text-white">Write to us</span>
                       </a>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
                       <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">Colour theme</span>
                       <ThemeSwitcher />
                     </div>

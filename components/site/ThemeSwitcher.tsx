@@ -13,12 +13,20 @@ export const themes = [
 
 type ThemeKey = (typeof themes)[number]["key"];
 
-export default function ThemeSwitcher({ size = "md" }: { size?: "md" | "lg" }) {
+export default function ThemeSwitcher({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   const [active, setActive] = useState<ThemeKey>("aurora");
 
+  // Follow <html data-theme>, so every switcher on the page stays in sync.
   useEffect(() => {
-    const t = document.documentElement.dataset.theme as ThemeKey | undefined;
-    if (t && themes.some((x) => x.key === t)) setActive(t);
+    const root = document.documentElement;
+    const sync = () => {
+      const t = root.dataset.theme as ThemeKey | undefined;
+      setActive(t && themes.some((x) => x.key === t) ? t : "aurora");
+    };
+    sync();
+    const mo = new MutationObserver(sync);
+    mo.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => mo.disconnect();
   }, []);
 
   const choose = (key: ThemeKey) => {
@@ -31,7 +39,8 @@ export default function ThemeSwitcher({ size = "md" }: { size?: "md" | "lg" }) {
     }
   };
 
-  const dot = size === "lg" ? "h-9 w-9" : "h-6 w-6";
+  const dot = { sm: "h-5 w-5", md: "h-6 w-6", lg: "h-9 w-9" }[size];
+  const btn = { sm: "h-7 w-7", md: "h-8 w-8", lg: "h-11 w-11" }[size];
 
   return (
     <div role="radiogroup" aria-label="Colour theme" className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1">
@@ -43,7 +52,7 @@ export default function ThemeSwitcher({ size = "md" }: { size?: "md" | "lg" }) {
           aria-label={`${t.label} theme`}
           title={t.label}
           onClick={() => choose(t.key)}
-          className={`relative flex items-center justify-center rounded-full ${size === "lg" ? "h-11 w-11" : "h-8 w-8"}`}
+          className={`relative flex items-center justify-center rounded-full ${btn}`}
         >
           {active === t.key && (
             <motion.span

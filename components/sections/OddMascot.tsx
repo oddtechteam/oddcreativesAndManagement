@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 // The "odd" logo redrawn as a living character: the smiley faces' eyes follow
 // the pointer, they blink, and the hands on the "d" ascenders wave.
@@ -25,13 +25,15 @@ function Hand({ x, y, delay }: { x: number; y: number; delay: string }) {
   );
 }
 
-export default function OddMascot({ className = "" }: { className?: string }) {
+// `compact` = small inline use (navbar logo): no glow, no aria label duplication.
+export default function OddMascot({ className = "", compact = false }: { className?: string; compact?: boolean }) {
   const ref = useRef<SVGSVGElement>(null);
   const [look, setLook] = useState<[number, number][]>([
     [0, 0],
     [0, 0],
   ]);
   const [happy, setHappy] = useState(false);
+  const gid = `odd-o-${useId().replace(/:/g, "")}`;
 
   useEffect(() => {
     let raf = 0;
@@ -65,15 +67,16 @@ export default function OddMascot({ className = "" }: { className?: string }) {
     <svg
       ref={ref}
       viewBox={`0 0 ${VB.w} ${VB.h}`}
-      role="img"
-      aria-label="Odd Creatives mascot — the odd logo, smiling and waving"
+      role={compact ? undefined : "img"}
+      aria-hidden={compact || undefined}
+      aria-label={compact ? undefined : "Odd Creatives mascot — the odd logo, smiling and waving"}
       className={`overflow-visible text-white ${className}`}
       onPointerEnter={() => setHappy(true)}
       onPointerLeave={() => setHappy(false)}
-      style={{ filter: "drop-shadow(0 20px 40px rgb(var(--brand) / 0.45))" }}
+      style={compact ? undefined : { filter: "drop-shadow(0 20px 40px rgb(var(--brand) / 0.45))" }}
     >
       <defs>
-        <linearGradient id="odd-o" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" style={{ stopColor: "rgb(var(--brand-soft))" }} />
           <stop offset="55%" style={{ stopColor: "rgb(var(--brand))" }} />
           <stop offset="100%" style={{ stopColor: "rgb(var(--aqua))" }} />
@@ -81,7 +84,7 @@ export default function OddMascot({ className = "" }: { className?: string }) {
       </defs>
 
       {/* o */}
-      <circle cx="62" cy="166" r="44" fill="none" stroke="url(#odd-o)" strokeWidth="17" />
+      <circle cx="62" cy="166" r="44" fill="none" stroke={`url(#${gid})`} strokeWidth="17" />
 
       {faces.map((f, i) => (
         <g key={i} fill="currentColor" stroke="currentColor">
