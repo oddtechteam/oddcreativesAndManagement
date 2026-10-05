@@ -5,6 +5,7 @@ import { SiteFooter, SiteHeader } from "@/components/site/Chrome";
 import ScrollTop from "@/components/site/ScrollTop";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import MobileBar from "@/components/site/MobileBar";
+import { oddtech } from "@/lib/oddtech";
 
 // Syne for bold, characterful headlines; Inter for reading; a handwritten
 // script for small playful notes (echoing the smiling "odd" logo).
@@ -30,10 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Before first paint: mark JS as available (scroll-reveal) and use OddTech's palette on /oddtech pages, and apply the saved light/dark mode. */}
+        {/* Before first paint: send /oddtech/* to OddTech's own domain (keeping subpath + hash), mark JS as available (scroll-reveal) and use OddTech's palette on /oddtech pages, and apply the saved light/dark mode. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
+              `(function(l){var m=l.pathname.match(/^\\/oddtech(?:\\.html)?(\\/.*)?$/);if(m)l.replace(${JSON.stringify(oddtech.url)}+(m[1]||"/").replace(/\\.html$/,"").replace(/(.)\\/$/,"$1")+l.hash)})(location);` +
               "document.documentElement.classList.add('js');try{var d=document.documentElement;if(/^\\/oddtech(\\.html)?(\\/|$)/.test(location.pathname))d.dataset.site='oddtech';var m=localStorage.getItem('odd-mode');if(m)d.dataset.mode=m}catch(e){}",
           }}
         />
