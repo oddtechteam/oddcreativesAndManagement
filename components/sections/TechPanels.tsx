@@ -4,6 +4,7 @@ import Spotlight from "@/components/ui/Spotlight";
 import { IconBadge, Section, SectionHeading } from "@/components/ui/Section";
 import Reveal from "@/components/ui/Reveal";
 import Aurora from "@/components/site/Aurora";
+import { oddtech } from "@/lib/oddtech";
 import { techPanels } from "@/lib/site";
 
 export default function TechPanels() {
@@ -20,7 +21,7 @@ export default function TechPanels() {
           }
           lead="Our technology arm designs, builds, and runs the digital products your brand depends on."
           action={
-            <Button href="/oddtech" variant="ghostLight">
+            <Button href={oddtech.url} variant="ghostLight">
               Explore OddTech
             </Button>
           }

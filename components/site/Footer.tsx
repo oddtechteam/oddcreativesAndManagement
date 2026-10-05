@@ -6,6 +6,7 @@ import Logo from "@/components/Logo";
 import Icon from "@/components/ui/Icon";
 import Marquee from "@/components/ui/Marquee";
 import { Container } from "@/components/ui/Section";
+import { oddtech } from "@/lib/oddtech";
 import { categories, nav, site } from "@/lib/site";
 import { SHEET_ENDPOINT } from "@/lib/sheetEndpoint";
 
@@ -83,7 +84,7 @@ export default function Footer() {
                 {c.title}
               </FooterLink>
             ))}
-            <FooterLink href="/oddtech">OddTech IT Solutions</FooterLink>
+            <FooterLink href={oddtech.url}>OddTech IT Solutions</FooterLink>
           </FooterCol>
 
           <div>
@@ -149,7 +150,7 @@ export default function Footer() {
           </span>
           <span>
             Designed &amp; built by{" "}
-            <Link href="/oddtech" className="text-white/70 hover:text-aqua">
+            <Link href={oddtech.url} className="text-white/70 hover:text-aqua">
               OddTech IT Solutions
             </Link>
           </span>

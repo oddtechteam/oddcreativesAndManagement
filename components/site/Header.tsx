@@ -31,7 +31,7 @@ const brands = {
     mega: {
       href: "/services",
       items: categories.map((c) => ({ icon: c.icon, title: c.title, desc: c.tagline, href: `/services#${c.key}` })) as MegaItem[],
-      featured: { eyebrow: "Technology arm", title: "OddTech IT Solutions", desc: "Websites, apps, stores & business systems.", href: "/oddtech" },
+      featured: { eyebrow: "Technology arm", title: "OddTech IT Solutions", desc: "Websites, apps, stores & business systems.", href: oddtech.url },
       cols: "grid-cols-2",
     },
   },

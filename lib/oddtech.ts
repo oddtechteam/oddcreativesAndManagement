@@ -5,6 +5,8 @@ import type { IconName } from "@/components/ui/Icon";
 
 export const oddtech = {
   name: "OddTech IT Solutions",
+  // OddTech's own site — the main site links here instead of its /oddtech pages.
+  url: "https://oddtechglobal.com",
   tagline: "Innovate. Integrate. Elevate.",
   sub: "Not ordinary. Just oddly effective.",
   intro:

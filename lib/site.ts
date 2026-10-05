@@ -1,3 +1,4 @@
+import { oddtech } from "@/lib/oddtech";
 import type { IconName } from "@/components/ui/Icon";
 
 // All site copy and contact details live here so pages stay layout-only.
@@ -26,7 +27,7 @@ export const nav = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/oddtech", label: "OddTech" },
+  { href: oddtech.url, label: "OddTech" },
   { href: "/contact", label: "Contact" },
 ];
 
